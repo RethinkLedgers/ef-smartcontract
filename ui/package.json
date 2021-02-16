@@ -1,0 +1,56 @@
+{
+  "name": "ef-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@daml.js/ef-app": "file:daml.js/ef-app-0.1.0",
+    "@daml/ledger": "1.9.0",
+    "@daml/react": "1.9.0",
+    "@daml/types": "1.9.0",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.3.0",
+    "@types/tinycolor2": "^1.4.2",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-simple": "^0.5.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.1",
+    "tinycolor2": "^1.4.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/jwt-simple": "^0.5.33",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-router-dom": "^5.1.7",
+    "react-scripts": "^3.3.0",
+    "typescript": "~3.8.3"
+  }
+}

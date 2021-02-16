@@ -1,0 +1,125 @@
+-- Copyright (c) 2021 Rethink Ledgers LLC. All rights reserved.
+
+
+
+module EF where
+
+import DA.Optional
+
+data EFType = Lease | Loan 
+  deriving (Eq, Show)
+
+data AssetType = Van | Tractor | Trailor
+  deriving (Eq, Show)
+
+data FundingStatus = Open | Funded
+  deriving (Eq, Show)  
+
+
+template WholesaleContract with
+    originator : Party
+    dealer : Party
+    eftype: EFType
+    startDate : Date
+    endDate : Optional Date
+    duration : Text
+    loanAmount : Decimal
+    interest : Decimal
+    assetType : AssetType
+    vin : Text
+    closingContract : Optional EFContract
+    status : Text
+
+  where
+    signatory originator
+    observer dealer
+
+    controller originator can  
+      nonconsuming CreateWholesaleContract : ContractId WholesaleContract
+       do create this
+
+    controller originator can
+      nonconsuming CloseWholeSaleContract : ContractId WholesaleContract
+       with 
+         newEndDate : Date
+         newClosingContract :  EFContract
+       do
+        archive self
+        create this  with endDate = Some newEndDate , status = "Closed", closingContract = Some newClosingContract
+
+
+template EFContract with
+    originator : Party
+    business : Party
+    eftype: EFType
+    startdate : Date
+    duration : Text
+    amount : Decimal
+    rate : Decimal
+    assetType : AssetType
+    vin : Text
+    businessCreditScore: Int
+    dealercommission: Optional Decimal
+    
+  where
+    signatory originator
+    observer business        
+
+    controller originator can 
+      nonconsuming CreateEFContract : ContractId EFContract
+       do create this
+
+   
+    controller originator can 
+      nonconsuming FundingRequest : ContractId FundingContractRequest
+       with 
+         newLessors: [Party]
+         newFundingDate : Date
+         newFee: Decimal
+       do
+        create FundingContractRequest with 
+          lessor = newLessors  
+          originationFee = newFee
+          fundingContract = this
+
+
+template FundingContractRequest with
+
+    lessor : [Party]
+    originationFee: Decimal
+    fundingContract: EFContract
+    
+  where
+    signatory fundingContract.originator
+    observer lessor
+
+
+    controller lessor can 
+      nonconsuming FundingApproval : ContractId FundingContractApproval
+       with 
+         newFundingDate : Date
+         newDealerCommission : Decimal
+         selectedlessor : Party
+
+       do
+        create FundingContractApproval with 
+          lessor = selectedlessor
+          fundingDate = newFundingDate
+          fundingRequest = this
+          fundingStatus = Funded
+          dealerCommission = newDealerCommission
+
+template FundingContractApproval with
+ 
+    lessor :  Party
+    fundingDate : Date
+    dealerCommission: Decimal
+    fundingRequest : FundingContractRequest
+    fundingStatus: FundingStatus
+    
+  where
+    signatory lessor
+    observer fundingRequest.fundingContract.originator
+
+
+
