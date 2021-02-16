@@ -9,4 +9,4 @@ var EF = require('./EF');
 exports.EF = EF;
 var User = require('./User');
 exports.User = User;
-exports.packageId = 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1';
+exports.packageId = '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339';

@@ -18,7 +18,7 @@ export declare type FundingContractApproval = {
 };
 
 export declare const FundingContractApproval:
-  damlTypes.Template<FundingContractApproval, undefined, 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:FundingContractApproval'> & {
+  damlTypes.Template<FundingContractApproval, undefined, '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:FundingContractApproval'> & {
   Archive: damlTypes.Choice<FundingContractApproval, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
 };
 
@@ -50,7 +50,7 @@ export declare type FundingContractRequest = {
 };
 
 export declare const FundingContractRequest:
-  damlTypes.Template<FundingContractRequest, undefined, 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:FundingContractRequest'> & {
+  damlTypes.Template<FundingContractRequest, undefined, '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:FundingContractRequest'> & {
   Archive: damlTypes.Choice<FundingContractRequest, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
   FundingApproval: damlTypes.Choice<FundingContractRequest, FundingApproval, damlTypes.ContractId<FundingContractApproval>, undefined>;
 };
@@ -96,11 +96,11 @@ export declare type EFContract = {
   assetType: AssetType;
   vin: string;
   businessCreditScore: damlTypes.Int;
-  dealercommission: damlTypes.Numeric;
+  dealercommission: damlTypes.Optional<damlTypes.Numeric>;
 };
 
 export declare const EFContract:
-  damlTypes.Template<EFContract, undefined, 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:EFContract'> & {
+  damlTypes.Template<EFContract, undefined, '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:EFContract'> & {
   Archive: damlTypes.Choice<EFContract, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
   CreateEFContract: damlTypes.Choice<EFContract, CreateEFContract, damlTypes.ContractId<EFContract>, undefined>;
   FundingRequest: damlTypes.Choice<EFContract, FundingRequest, damlTypes.ContractId<FundingContractRequest>, undefined>;
@@ -126,24 +126,34 @@ export declare const CloseWholeSaleContract:
 ;
 
 
+export declare type CreateWholesaleContract = {
+};
+
+export declare const CreateWholesaleContract:
+  damlTypes.Serializable<CreateWholesaleContract> & {
+  }
+;
+
+
 export declare type WholesaleContract = {
   originator: damlTypes.Party;
   dealer: damlTypes.Party;
   eftype: EFType;
   startDate: damlTypes.Date;
-  endDate: damlTypes.Date;
+  endDate: damlTypes.Optional<damlTypes.Date>;
   duration: string;
   loanAmount: damlTypes.Numeric;
   interest: damlTypes.Numeric;
   assetType: AssetType;
   vin: string;
-  closingContract: EFContract;
+  closingContract: damlTypes.Optional<EFContract>;
   status: string;
 };
 
 export declare const WholesaleContract:
-  damlTypes.Template<WholesaleContract, undefined, 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:WholesaleContract'> & {
+  damlTypes.Template<WholesaleContract, undefined, '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:WholesaleContract'> & {
   Archive: damlTypes.Choice<WholesaleContract, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, undefined>;
+  CreateWholesaleContract: damlTypes.Choice<WholesaleContract, CreateWholesaleContract, damlTypes.ContractId<WholesaleContract>, undefined>;
   CloseWholeSaleContract: damlTypes.Choice<WholesaleContract, CloseWholeSaleContract, damlTypes.ContractId<WholesaleContract>, undefined>;
 };
 

@@ -4,8 +4,6 @@
 
 module EF where
 
-import DA.Optional
-
 data EFType = Lease | Loan 
   deriving (Eq, Show)
 

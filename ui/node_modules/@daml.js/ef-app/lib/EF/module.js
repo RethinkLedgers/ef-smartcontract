@@ -16,7 +16,7 @@ var pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662 = requir
 
 
 exports.FundingContractApproval = {
-  templateId: 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:FundingContractApproval',
+  templateId: '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:FundingContractApproval',
   keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
   keyEncode: function () { throw 'EncodeError'; },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({lessor: damlTypes.Party.decoder, fundingDate: damlTypes.Date.decoder, dealerCommission: damlTypes.Numeric(10).decoder, fundingRequest: exports.FundingContractRequest.decoder, fundingStatus: exports.FundingStatus.decoder, }); }),
@@ -60,7 +60,7 @@ exports.FundingApproval = {
 
 
 exports.FundingContractRequest = {
-  templateId: 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:FundingContractRequest',
+  templateId: '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:FundingContractRequest',
   keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
   keyEncode: function () { throw 'EncodeError'; },
   decoder: damlTypes.lazyMemo(function () { return jtv.object({lessor: damlTypes.List(damlTypes.Party).decoder, originationFee: damlTypes.Numeric(10).decoder, fundingContract: exports.EFContract.decoder, }); }),
@@ -121,10 +121,10 @@ exports.CreateEFContract = {
 
 
 exports.EFContract = {
-  templateId: 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:EFContract',
+  templateId: '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:EFContract',
   keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
   keyEncode: function () { throw 'EncodeError'; },
-  decoder: damlTypes.lazyMemo(function () { return jtv.object({originator: damlTypes.Party.decoder, business: damlTypes.Party.decoder, eftype: exports.EFType.decoder, startdate: damlTypes.Date.decoder, duration: damlTypes.Text.decoder, amount: damlTypes.Numeric(10).decoder, rate: damlTypes.Numeric(10).decoder, assetType: exports.AssetType.decoder, vin: damlTypes.Text.decoder, businessCreditScore: damlTypes.Int.decoder, dealercommission: damlTypes.Numeric(10).decoder, }); }),
+  decoder: damlTypes.lazyMemo(function () { return jtv.object({originator: damlTypes.Party.decoder, business: damlTypes.Party.decoder, eftype: exports.EFType.decoder, startdate: damlTypes.Date.decoder, duration: damlTypes.Text.decoder, amount: damlTypes.Numeric(10).decoder, rate: damlTypes.Numeric(10).decoder, assetType: exports.AssetType.decoder, vin: damlTypes.Text.decoder, businessCreditScore: damlTypes.Int.decoder, dealercommission: damlTypes.Optional(damlTypes.Numeric(10)).decoder, }); }),
   encode: function (__typed__) {
   return {
     originator: damlTypes.Party.encode(__typed__.originator),
@@ -137,7 +137,7 @@ exports.EFContract = {
     assetType: exports.AssetType.encode(__typed__.assetType),
     vin: damlTypes.Text.encode(__typed__.vin),
     businessCreditScore: damlTypes.Int.encode(__typed__.businessCreditScore),
-    dealercommission: damlTypes.Numeric(10).encode(__typed__.dealercommission),
+    dealercommission: damlTypes.Optional(damlTypes.Numeric(10)).encode(__typed__.dealercommission),
   };
 }
 ,
@@ -185,24 +185,35 @@ exports.CloseWholeSaleContract = {
 
 
 
+exports.CreateWholesaleContract = {
+  decoder: damlTypes.lazyMemo(function () { return jtv.object({}); }),
+  encode: function (__typed__) {
+  return {
+  };
+}
+,
+};
+
+
+
 exports.WholesaleContract = {
-  templateId: 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:EF:WholesaleContract',
+  templateId: '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:EF:WholesaleContract',
   keyDecoder: damlTypes.lazyMemo(function () { return jtv.constant(undefined); }),
   keyEncode: function () { throw 'EncodeError'; },
-  decoder: damlTypes.lazyMemo(function () { return jtv.object({originator: damlTypes.Party.decoder, dealer: damlTypes.Party.decoder, eftype: exports.EFType.decoder, startDate: damlTypes.Date.decoder, endDate: damlTypes.Date.decoder, duration: damlTypes.Text.decoder, loanAmount: damlTypes.Numeric(10).decoder, interest: damlTypes.Numeric(10).decoder, assetType: exports.AssetType.decoder, vin: damlTypes.Text.decoder, closingContract: exports.EFContract.decoder, status: damlTypes.Text.decoder, }); }),
+  decoder: damlTypes.lazyMemo(function () { return jtv.object({originator: damlTypes.Party.decoder, dealer: damlTypes.Party.decoder, eftype: exports.EFType.decoder, startDate: damlTypes.Date.decoder, endDate: damlTypes.Optional(damlTypes.Date).decoder, duration: damlTypes.Text.decoder, loanAmount: damlTypes.Numeric(10).decoder, interest: damlTypes.Numeric(10).decoder, assetType: exports.AssetType.decoder, vin: damlTypes.Text.decoder, closingContract: damlTypes.Optional(exports.EFContract).decoder, status: damlTypes.Text.decoder, }); }),
   encode: function (__typed__) {
   return {
     originator: damlTypes.Party.encode(__typed__.originator),
     dealer: damlTypes.Party.encode(__typed__.dealer),
     eftype: exports.EFType.encode(__typed__.eftype),
     startDate: damlTypes.Date.encode(__typed__.startDate),
-    endDate: damlTypes.Date.encode(__typed__.endDate),
+    endDate: damlTypes.Optional(damlTypes.Date).encode(__typed__.endDate),
     duration: damlTypes.Text.encode(__typed__.duration),
     loanAmount: damlTypes.Numeric(10).encode(__typed__.loanAmount),
     interest: damlTypes.Numeric(10).encode(__typed__.interest),
     assetType: exports.AssetType.encode(__typed__.assetType),
     vin: damlTypes.Text.encode(__typed__.vin),
-    closingContract: exports.EFContract.encode(__typed__.closingContract),
+    closingContract: damlTypes.Optional(exports.EFContract).encode(__typed__.closingContract),
     status: damlTypes.Text.encode(__typed__.status),
   };
 }
@@ -214,6 +225,14 @@ exports.WholesaleContract = {
     argumentEncode: function (__typed__) { return pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive.encode(__typed__); },
     resultDecoder: damlTypes.lazyMemo(function () { return damlTypes.Unit.decoder; }),
     resultEncode: function (__typed__) { return damlTypes.Unit.encode(__typed__); },
+  },
+  CreateWholesaleContract: {
+    template: function () { return exports.WholesaleContract; },
+    choiceName: 'CreateWholesaleContract',
+    argumentDecoder: damlTypes.lazyMemo(function () { return exports.CreateWholesaleContract.decoder; }),
+    argumentEncode: function (__typed__) { return exports.CreateWholesaleContract.encode(__typed__); },
+    resultDecoder: damlTypes.lazyMemo(function () { return damlTypes.ContractId(exports.WholesaleContract).decoder; }),
+    resultEncode: function (__typed__) { return damlTypes.ContractId(exports.WholesaleContract).encode(__typed__); },
   },
   CloseWholeSaleContract: {
     template: function () { return exports.WholesaleContract; },

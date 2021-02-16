@@ -25,7 +25,7 @@ export declare type User = {
 };
 
 export declare const User:
-  damlTypes.Template<User, User.Key, 'd0308dc2a690c05522c58fde975fbc5f8333978a44b67f67050c0e2a454ee7f1:User:User'> & {
+  damlTypes.Template<User, User.Key, '87e8fa992a9c21a44aba005379904cdff0561a6fdb83c001f463ef1d4dcb0339:User:User'> & {
   Archive: damlTypes.Choice<User, pkgd14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662.DA.Internal.Template.Archive, {}, User.Key>;
   Follow: damlTypes.Choice<User, Follow, damlTypes.ContractId<User>, User.Key>;
 };

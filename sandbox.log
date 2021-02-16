@@ -50,3 +50,25 @@
 22:10:04.525 [pool-1-thread-1] WARN  c.d.p.store.dao.HikariConnection - Asynchronous commits are not compatible with h2database database backend 
 22:10:07.577 [pool-1-thread-4] INFO  c.d.p.apiserver.LedgerApiServer - Listening on localhost:6865 over plain text. 
 22:10:07.602 [pool-1-thread-4] INFO  com.daml.platform.sandboxnext.Runner - Initialized sandbox version 1.9.0 with ledger-id = ef-app, port = 6865, dar file = List(.daml\dist\ef-app-0.1.0.dar), time mode = wall-clock time, ledger = in-memory, auth-service = AuthServiceWildcard$, contract ids seeding = strong 
+08:37:02.366 [daml.index.db.connection.api-server-0] ERROR c.d.platform.store.dao.DbDispatcher - Exception while executing SQL query. Rolled back. (context: {metric=remove_expired_deduplication_data}) 
+java.sql.SQLTransientConnectionException: daml.index.db.connection.api-server - Connection is not available, request timed out after 302ms.
+	at com.zaxxer.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:676)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:190)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:155)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:100)
+	at com.daml.platform.store.dao.HikariJdbcConnectionProvider.runSQL(HikariJdbcConnectionProvider.scala:143)
+	at com.daml.platform.store.dao.DbDispatcher.$anonfun$executeSql$2(DbDispatcher.scala:53)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:830)
+10:35:55.387 [sandbox-akka.actor.default-dispatcher-4] INFO  akka.event.slf4j.Slf4jLogger - Slf4jLogger started 
+10:35:58.406 [pool-1-thread-3] WARN  c.d.p.store.dao.HikariConnection - Asynchronous commits are not compatible with h2database database backend 
+10:36:02.669 [pool-1-thread-2] INFO  c.d.p.apiserver.LedgerApiServer - Listening on localhost:6865 over plain text. 
+10:36:02.679 [pool-1-thread-2] INFO  com.daml.platform.sandboxnext.Runner - Initialized sandbox version 1.9.0 with ledger-id = 961021bb-ab9f-4889-8fff-4d2ac0de59ae, port = 6865, dar file = List(.daml\dist\ef-app-0.1.0.dar), time mode = static time, ledger = in-memory, auth-service = AuthServiceWildcard$, contract ids seeding = strong 
