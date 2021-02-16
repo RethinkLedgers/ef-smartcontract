@@ -28,24 +28,24 @@ export default function WholesaleContractList() {
       title: "New WholeSale Contract",
       defaultValue: {
         originator : party,
-        business : party,
+        dealer : party,
         eftype: "Lease",
-        startdate : "",
+        startDate : "",
+        endDate : "",
         duration : "",
         amount : "0",
         rate : "0.0",
         assetType : "Van",
         vin : "",
-        businessCreditScore: "",
-        dealercommission: "",
+        status: "",
       },
       fields: {
           originator: {
               label: "Originator",
               type: "text",
           },
-          business: {
-              label: "Business",
+          dealer: {
+              label: "Dealer",
               type: "text"
           },
           eftype: {
@@ -53,10 +53,14 @@ export default function WholesaleContractList() {
             type: "selection",
             items: ["Loan", "Lease"]
           },
-          startdate: {
-              label: "Date of Appraisal",
+          startDate: {
+              label: "Start Date",
               type: "date"
           },
+          endDate: {
+            label: "End Date",
+            type: "date"
+        },
           duration: {
             label: "Duration",
             type: "selection",
@@ -79,13 +83,10 @@ export default function WholesaleContractList() {
             label: "Vin",
             type: "text"
           },
-          businessCreditScore: {
-            label: "Business Score",
-            type: "number"
-          },
-          dealercommission: {
-            label: "Commission",
-            type: "number"
+          status: {
+            label: "Status",
+            type: "selection",
+            items: ["Funded", "Closed"]
           }
       },
       onClose: async function () { }

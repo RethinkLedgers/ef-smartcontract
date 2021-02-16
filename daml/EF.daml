@@ -21,8 +21,8 @@ template WholesaleContract with
     startDate : Date
     endDate : Optional Date
     duration : Text
-    loanAmount : Decimal
-    interest : Decimal
+    amount : Decimal
+    rate : Decimal
     assetType : AssetType
     vin : Text
     closingContract : Optional EFContract
@@ -57,7 +57,7 @@ template EFContract with
     assetType : AssetType
     vin : Text
     businessCreditScore: Int
-    dealercommission: Optional Decimal
+    dealerCommission: Optional Decimal
     
   where
     signatory originator
@@ -71,21 +71,27 @@ template EFContract with
     controller originator can 
       nonconsuming FundingRequest : ContractId FundingContractRequest
        with 
-         newLessors: [Party]
-         newFundingDate : Date
+         newLessor: Party
          newFee: Decimal
+         newFundingContractId : Text
+       
        do
+    
         create FundingContractRequest with 
-          lessor = newLessors  
+          lessor = newLessor  
           originationFee = newFee
           fundingContract = this
+          fundingContractId = newFundingContractId
+          
 
 
 template FundingContractRequest with
 
-    lessor : [Party]
+    lessor : Party
     originationFee: Decimal
     fundingContract: EFContract
+    fundingContractId : Text
+  
     
   where
     signatory fundingContract.originator
@@ -95,17 +101,20 @@ template FundingContractRequest with
     controller lessor can 
       nonconsuming FundingApproval : ContractId FundingContractApproval
        with 
+         selectedlessor : Party
          newFundingDate : Date
          newDealerCommission : Decimal
-         selectedlessor : Party
+         newFundingRequestId : Text
 
-       do
-        create FundingContractApproval with 
-          lessor = selectedlessor
-          fundingDate = newFundingDate
-          fundingRequest = this
-          fundingStatus = Funded
-          dealerCommission = newDealerCommission
+        do 
+
+          create FundingContractApproval with 
+            lessor = selectedlessor
+            fundingDate = newFundingDate
+            fundingRequest = this
+            fundingRequestId = newFundingRequestId
+            fundingStatus = Funded
+            dealerCommission = newDealerCommission
 
 template FundingContractApproval with
  
@@ -113,6 +122,7 @@ template FundingContractApproval with
     fundingDate : Date
     dealerCommission: Decimal
     fundingRequest : FundingContractRequest
+    fundingRequestId : Text
     fundingStatus: FundingStatus
     
   where

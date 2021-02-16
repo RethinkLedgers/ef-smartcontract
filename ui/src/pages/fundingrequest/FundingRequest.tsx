@@ -5,27 +5,28 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Button from "@material-ui/core/Button";
-import { useStreamQueries, useQuery, useLedger, useParty } from "@daml/react";
+import { useStreamQueries, useLedger, useParty } from "@daml/react";
 import Ledger from "@daml/ledger";
-import { FundingApproval  } from "@daml.js/ef-app/lib/EF";
+import { FundingApproval, FundingContractRequest  } from "@daml.js/ef-app/lib/EF";
 import { EF } from '@daml.js/ef-app/lib';
 import { InputDialog, InputDialogProps } from "./InputDialog";
 import useStyles from "./styles";
+import { ContractId } from "@daml/types";
 
 export default function FundingRequestList() {
     const assets = useStreamQueries(EF.FundingContractRequest).contracts;
     const classes = useStyles();
     const party = useParty();
+    const contractid = ContractId
     const ledger : Ledger = useLedger();
 
-   
     const defaultApprovalProps : InputDialogProps<FundingApproval> = {
       open: false,
       title: "Funding Approval",
-      defaultValue: { newFundingDate : "" ,  newDealerCommission: "",  selectedlessor: party },
-      fields: {
+      defaultValue: {  newFundingDate: "",  newDealerCommission: "",  selectedlessor: party, newFundingRequestId: ""},
+      fields :{
         newFundingDate : {
-          label: "New Owner",
+          label: "FundingDate",
           type: "date"
         },
         newDealerCommission : {
@@ -34,6 +35,10 @@ export default function FundingRequestList() {
         },
         selectedlessor : {
           label: "Lessor",
+          type: "text"
+        },
+        newFundingRequestId : {
+          label: "FundingRequest Contract Id",
           type: "text"
         }
       },
@@ -46,6 +51,7 @@ export default function FundingRequestList() {
     function showApproval(asset : EF.FundingContractRequest.CreateEvent) {
       async function onClose(state : FundingApproval | null) {
         setApprovalProps({ ...defaultApprovalProps, open: false});
+        if (!state) return;
         await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, state);
       };
       setApprovalProps({ ...defaultApprovalProps, open: true, onClose})
@@ -62,7 +68,7 @@ export default function FundingRequestList() {
               <TableCell key={0} className={classes.tableCell}>Lessor</TableCell>
               <TableCell key={1} className={classes.tableCell}>OriginationFee</TableCell>
               <TableCell key={2} className={classes.tableCell}>Originator</TableCell>
-              <TableCell key={5} className={classes.tableCell}>Approval</TableCell>
+              <TableCell key={3} className={classes.tableCell}>Approval</TableCell>
            
             </TableRow>
           </TableHead>
@@ -72,8 +78,8 @@ export default function FundingRequestList() {
                 <TableCell key={0} className={classes.tableCell}>{a.payload.lessor}</TableCell>
                 <TableCell key={1} className={classes.tableCell}>{a.payload.originationFee}</TableCell>
                 <TableCell key={2} className={classes.tableCell}>{a.payload.fundingContract.originator}</TableCell>
-                <TableCell key={5} className={classes.tableCellButton}>
-                  <Button color="primary" size="small" className={classes.choiceButton} variant="contained" disabled={a.payload.lessor !== party} onClick={() => showApproval(a)}>Approval</Button>
+                <TableCell key={3} className={classes.tableCellButton}>
+                  <Button color="primary" size="small" className={classes.choiceButton} variant="contained"  onClick={() => showApproval(a)}>Approval</Button>
                 </TableCell>
 
               </TableRow>
