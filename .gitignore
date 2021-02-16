@@ -1,2 +1,5 @@
 /.daml
 /ui/node_modules
+/ui/daml.js
+/ui/yarn.lock
+sandbox.log
