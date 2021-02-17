@@ -72,3 +72,15 @@ java.sql.SQLTransientConnectionException: daml.index.db.connection.api-server - 
 10:35:58.406 [pool-1-thread-3] WARN  c.d.p.store.dao.HikariConnection - Asynchronous commits are not compatible with h2database database backend 
 10:36:02.669 [pool-1-thread-2] INFO  c.d.p.apiserver.LedgerApiServer - Listening on localhost:6865 over plain text. 
 10:36:02.679 [pool-1-thread-2] INFO  com.daml.platform.sandboxnext.Runner - Initialized sandbox version 1.9.0 with ledger-id = 961021bb-ab9f-4889-8fff-4d2ac0de59ae, port = 6865, dar file = List(.daml\dist\ef-app-0.1.0.dar), time mode = static time, ledger = in-memory, auth-service = AuthServiceWildcard$, contract ids seeding = strong 
+21:21:59.147 [sandbox-akka.actor.default-dispatcher-4] INFO  akka.event.slf4j.Slf4jLogger - Slf4jLogger started 
+21:22:01.729 [pool-1-thread-1] WARN  c.d.p.store.dao.HikariConnection - Asynchronous commits are not compatible with h2database database backend 
+21:22:04.946 [pool-1-thread-4] INFO  c.d.p.apiserver.LedgerApiServer - Listening on localhost:6865 over plain text. 
+21:22:04.962 [pool-1-thread-4] INFO  com.daml.platform.sandboxnext.Runner - Initialized sandbox version 1.9.0 with ledger-id = ef-app, port = 6865, dar file = List(.daml\dist\ef-app-0.1.0.dar), time mode = wall-clock time, ledger = in-memory, auth-service = AuthServiceWildcard$, contract ids seeding = strong 
+21:27:04.355 [sandbox-akka.actor.default-dispatcher-5] INFO  akka.event.slf4j.Slf4jLogger - Slf4jLogger started 
+21:27:06.528 [pool-1-thread-2] WARN  c.d.p.store.dao.HikariConnection - Asynchronous commits are not compatible with h2database database backend 
+21:27:09.663 [pool-1-thread-2] INFO  c.d.p.apiserver.LedgerApiServer - Listening on localhost:6865 over plain text. 
+21:27:09.679 [pool-1-thread-2] INFO  com.daml.platform.sandboxnext.Runner - Initialized sandbox version 1.9.0 with ledger-id = ef-app, port = 6865, dar file = List(.daml\dist\ef-app-0.1.0.dar), time mode = wall-clock time, ledger = in-memory, auth-service = AuthServiceWildcard$, contract ids seeding = strong 
+21:28:15.760 [sandbox-akka.actor.default-dispatcher-5] INFO  akka.event.slf4j.Slf4jLogger - Slf4jLogger started 
+21:28:18.170 [pool-1-thread-2] WARN  c.d.p.store.dao.HikariConnection - Asynchronous commits are not compatible with h2database database backend 
+21:28:21.108 [pool-1-thread-3] INFO  c.d.p.apiserver.LedgerApiServer - Listening on localhost:6865 over plain text. 
+21:28:21.139 [pool-1-thread-3] INFO  com.daml.platform.sandboxnext.Runner - Initialized sandbox version 1.9.0 with ledger-id = ef-app, port = 6865, dar file = List(.daml\dist\ef-app-0.1.0.dar), time mode = wall-clock time, ledger = in-memory, auth-service = AuthServiceWildcard$, contract ids seeding = strong 

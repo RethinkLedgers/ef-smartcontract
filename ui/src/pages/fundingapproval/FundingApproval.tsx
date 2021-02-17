@@ -19,19 +19,21 @@ export default function FundingApprovalList() {
     <Table size="small">
     <TableHead>
       <TableRow className={classes.tableRow}>
-        <TableCell key={0} className={classes.tableCell}>Lessor</TableCell>
-        <TableCell key={1} className={classes.tableCell}>FundingDate</TableCell>
-        <TableCell key={2} className={classes.tableCell}>Funding Contract ID</TableCell>
-        <TableCell key={3} className={classes.tableCell}>Amount</TableCell>
+        <TableCell key={0} className={classes.tableCell}>Contract</TableCell>
+        <TableCell key={1} className={classes.tableCell}>Lessor</TableCell>
+        <TableCell key={2} className={classes.tableCell}>FundingDate</TableCell>
+        <TableCell key={3} className={classes.tableCell}>Funding Contract ID</TableCell>
+        <TableCell key={4} className={classes.tableCell}>Amount</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
       {assets.map(a => (
         <TableRow key={a.contractId} className={classes.tableRow}>
-          <TableCell key={0} className={classes.tableCell}>{a.payload.lessor}</TableCell>
-          <TableCell key={1} className={classes.tableCell}>{a.payload.fundingDate}</TableCell>
-          <TableCell key={1} className={classes.tableCell}>{a.payload.fundingRequestId}</TableCell>
-          <TableCell key={2} className={classes.tableCell}>{a.payload.fundingRequest.fundingContract.amount}</TableCell>
+          <TableCell key={0} className={classes.tableCell}>{a.contractId}</TableCell>
+          <TableCell key={1} className={classes.tableCell}>{a.payload.lessor}</TableCell>
+          <TableCell key={2} className={classes.tableCell}>{a.payload.fundingDate}</TableCell>
+          <TableCell key={3} className={classes.tableCell}>{a.payload.fundingRequestId}</TableCell>
+          <TableCell key={4} className={classes.tableCell}>{a.payload.fundingRequest.fundingContract.amount}</TableCell>
         </TableRow>
           ))}
       </TableBody>

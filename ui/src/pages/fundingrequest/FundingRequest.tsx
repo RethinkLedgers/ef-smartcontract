@@ -65,20 +65,22 @@ export default function FundingRequestList() {
         <Table size="small">
           <TableHead>
             <TableRow className={classes.tableRow}>
-              <TableCell key={0} className={classes.tableCell}>Lessor</TableCell>
-              <TableCell key={1} className={classes.tableCell}>OriginationFee</TableCell>
-              <TableCell key={2} className={classes.tableCell}>Originator</TableCell>
-              <TableCell key={3} className={classes.tableCell}>Approval</TableCell>
+              <TableCell key={0} className={classes.tableCell}>Contract</TableCell>
+              <TableCell key={1} className={classes.tableCell}>Lessor</TableCell>
+              <TableCell key={2} className={classes.tableCell}>OriginationFee</TableCell>
+              <TableCell key={3} className={classes.tableCell}>Originator</TableCell>
+              <TableCell key={4} className={classes.tableCell}>Approval</TableCell>
            
             </TableRow>
           </TableHead>
           <TableBody>
             {assets.map(a => (
               <TableRow key={a.contractId} className={classes.tableRow}>
-                <TableCell key={0} className={classes.tableCell}>{a.payload.lessor}</TableCell>
-                <TableCell key={1} className={classes.tableCell}>{a.payload.originationFee}</TableCell>
-                <TableCell key={2} className={classes.tableCell}>{a.payload.fundingContract.originator}</TableCell>
-                <TableCell key={3} className={classes.tableCellButton}>
+                <TableCell key={0} className={classes.tableCell}>{a.contractId}</TableCell>
+                <TableCell key={1} className={classes.tableCell}>{a.payload.lessor}</TableCell>
+                <TableCell key={2} className={classes.tableCell}>{a.payload.originationFee}</TableCell>
+                <TableCell key={3} className={classes.tableCell}>{a.payload.fundingContract.originator}</TableCell>
+                <TableCell key={4} className={classes.tableCellButton}>
                   <Button color="primary" size="small" className={classes.choiceButton} variant="contained"  onClick={() => showApproval(a)}>Approval</Button>
                 </TableCell>
 

@@ -23,7 +23,6 @@ const Sidebar = ({ location } : RouteComponentProps) => {
     <Drawer open variant="permanent" className={classes.drawer} classes={{ paper: classes.drawer }}>
       <div className={classes.toolbar} />
       <List style={{ width: "100%" }}>
-        <SidebarLink key={0} label="Mainscreen" path="/app/mainscreen" icon={(<ListIcon />)} location={location} />
         <SidebarLink key={1} label="WholeSale Contract" path="/app/wholesale" icon={(<ListIcon />)} location={location} />
         <SidebarLink key={2} label="EF Contract" path="/app/retail" icon={(<ListIcon />)} location={location} />
         <SidebarLink key={3} label="Funding Request" path="/app/fundingrequest" icon={(<ListIcon />)} location={location} />

@@ -25,7 +25,7 @@ template WholesaleContract with
     rate : Decimal
     assetType : AssetType
     vin : Text
-    closingContract : Optional EFContract
+    closingContractId : Optional Text
     status : Text
 
   where
@@ -40,10 +40,10 @@ template WholesaleContract with
       nonconsuming CloseWholeSaleContract : ContractId WholesaleContract
        with 
          newEndDate : Date
-         newClosingContract :  EFContract
+         newClosingContractId :  Text
        do
         archive self
-        create this  with endDate = Some newEndDate , status = "Closed", closingContract = Some newClosingContract
+        create this  with endDate = Some newEndDate , status = "Closed", closingContractId = Some newClosingContractId
 
 
 template EFContract with
@@ -69,14 +69,13 @@ template EFContract with
 
    
     controller originator can 
-      nonconsuming FundingRequest : ContractId FundingContractRequest
+      FundingRequest : ContractId FundingContractRequest
        with 
          newLessor: Party
          newFee: Decimal
          newFundingContractId : Text
        
        do
-    
         create FundingContractRequest with 
           lessor = newLessor  
           originationFee = newFee
@@ -99,7 +98,7 @@ template FundingContractRequest with
 
 
     controller lessor can 
-      nonconsuming FundingApproval : ContractId FundingContractApproval
+      FundingApproval : ContractId FundingContractApproval
        with 
          selectedlessor : Party
          newFundingDate : Date

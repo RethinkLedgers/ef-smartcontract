@@ -164,7 +164,7 @@ export default function EFContractList() {
               <TableCell key={8}> Vin</TableCell>
               <TableCell key={9}> Business Score</TableCell>
               <TableCell key={10}> Commission</TableCell>
-              <TableCell key={3} className={classes.tableCell}>Request</TableCell>
+              <TableCell key={11} className={classes.tableCell}>Request</TableCell>
             </TableRow>
 
           </TableHead>
@@ -182,7 +182,7 @@ export default function EFContractList() {
                 <TableCell key={8} >{r.payload.vin}</TableCell>
                 <TableCell key={9} >{r.payload.businessCreditScore}</TableCell>
                 <TableCell key={10} >{r.payload.dealerCommission}</TableCell>
-                <TableCell key={3} className={classes.tableCellButton}>
+                <TableCell key={11} className={classes.tableCellButton}>
                   <Button color="primary" size="small" className={classes.choiceButton} variant="contained" onClick={() => showRequest(r)}>Funding Request</Button>
                 </TableCell>
               </TableRow>

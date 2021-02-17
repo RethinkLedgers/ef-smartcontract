@@ -16,7 +16,7 @@ export default function App() {
         <Route
           exact
           path="/app"
-          render={() => <Redirect to="/app/mainscreen" />}
+          render={() => <Redirect to="/app/retail" />}
         />
         <PrivateRoute path="/app" component={Layout} />
         <PublicRoute path="/login" component={Login} />
@@ -47,7 +47,7 @@ export default function App() {
     })
 
     return (
-      <Redirect to="/app/mainscreen" />
+      <Redirect to="/app/retail" />
     )
   }
 
