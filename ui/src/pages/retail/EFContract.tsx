@@ -55,7 +55,7 @@ export default function EFContractList() {
         items: ["Loan", "Lease"]
       },
       startdate: {
-        label: "Date of Appraisal",
+        label: "Contract Date",
         type: "date"
       },
       duration: {
@@ -171,7 +171,7 @@ export default function EFContractList() {
           <TableBody>
             {retailcontracts.map(r => (
               <TableRow key={r.contractId}>
-                <TableCell key={0} >{r.contractId}</TableCell>
+                <TableCell key={0}  className={classes.tableCellContract}>{r.contractId}</TableCell>
                 <TableCell key={1} >{r.payload.originator}</TableCell>
                 <TableCell key={2} >{r.payload.business}</TableCell>
                 <TableCell key={3} >{r.payload.eftype}</TableCell>

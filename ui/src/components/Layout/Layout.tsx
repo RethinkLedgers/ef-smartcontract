@@ -27,8 +27,8 @@ const Layout = () => {
               <div className={classes.content}>
                 <div className={classes.fakeToolbar} />
                 <Switch>
-                  <Route path="/app/wholesale" component={WholeSaleContractList} />
                   <Route path="/app/retail" component={EFContractList} />
+                  <Route path="/app/wholesale" component={WholeSaleContractList} />
                   <Route path="/app/fundingrequest" component={FundingRequestList} />
                   <Route path="/app/fundingapproved" component={FundingApprovalList} />
                 </Switch>

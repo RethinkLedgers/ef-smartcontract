@@ -38,7 +38,7 @@ export default function WholesaleContractList() {
       rate: "0.0",
       assetType: "Van",
       vin: "",
-      closingContract: "",
+      closingContractId: "",
       status: "",
     },
     fields: {
@@ -85,7 +85,7 @@ export default function WholesaleContractList() {
         label: "Vin",
         type: "text"
       },
-      closingContract: {
+      closingContractId: {
         label: "Closing Contract",
         type: "text"
       },
@@ -110,7 +110,7 @@ export default function WholesaleContractList() {
 
   const defaultCloseProps: InputDialogProps<CloseWholeSaleContract> = {
     open: false,
-    title: "Funding Request",
+    title: "Close Contract",
     defaultValue: { newEndDate: "", newClosingContractId: "" },
     fields: {
       newEndDate: {
@@ -118,7 +118,7 @@ export default function WholesaleContractList() {
         type: "date"
       },
       newClosingContractId: {
-        label: "Closing Contract",
+        label: "Closing Contract Id",
         type: "text"
       }
     },
@@ -141,6 +141,7 @@ export default function WholesaleContractList() {
   return (
     <Container>
       <Grid >
+        <InputDialog {...closeProps} />
         <InputDialog {...newAssetProps} />
         <Button color="primary" size="small" className={classes.choiceButton} variant="contained" onClick={() => showNewAsset()}>
           Create New WholeSale Contract
@@ -155,21 +156,31 @@ export default function WholesaleContractList() {
               <TableCell key={0}> Contract</TableCell>
               <TableCell key={1}> Originator</TableCell>
               <TableCell key={2}> Dealer</TableCell>
-              <TableCell key={3}> Amount</TableCell>
-              <TableCell key={4}> Rate</TableCell>
-              <TableCell key={5} >Close Contract</TableCell>
+              <TableCell key={3}> Type</TableCell>
+              <TableCell key={4}> Amount</TableCell>
+              <TableCell key={5}> Rate</TableCell>
+              <TableCell key={6}> Asset Type</TableCell>
+              <TableCell key={7}> Vin</TableCell>
+              <TableCell key={8}> Status</TableCell>
+              <TableCell key={9}> Closinging Contract</TableCell>
+              <TableCell key={10} >Close</TableCell>
             </TableRow>
 
           </TableHead>
           <TableBody>
             {assets.map(a => (
               <TableRow key={a.contractId}>
-                <TableCell key={0} >{a.contractId}</TableCell>
+                <TableCell key={0}  className={classes.tableCellContract}>{a.contractId}</TableCell>
                 <TableCell key={1} >{a.payload.originator}</TableCell>
                 <TableCell key={2} >{a.payload.dealer}</TableCell>
-                <TableCell key={3} >{a.payload.amount}</TableCell>
-                <TableCell key={4} >{a.payload.rate}</TableCell>
-                <TableCell key={5} className={classes.tableCellButton}>
+                <TableCell key={3} >{a.payload.eftype}</TableCell>
+                <TableCell key={4} >{a.payload.amount}</TableCell>
+                <TableCell key={5} >{a.payload.rate}</TableCell>
+                <TableCell key={6} >{a.payload.assetType}</TableCell>
+                <TableCell key={7} >{a.payload.vin}</TableCell>
+                <TableCell key={8} >{a.payload.status}</TableCell>
+                <TableCell key={9} >{a.payload.closingContractId}</TableCell>
+                <TableCell key={10} className={classes.tableCellButton}>
                   <Button color="primary" size="small" className={classes.choiceButton} variant="contained" onClick={() => showClose(a)}>Close Contract</Button>
                 </TableCell>
               </TableRow>

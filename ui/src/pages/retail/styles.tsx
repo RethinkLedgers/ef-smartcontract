@@ -1,6 +1,15 @@
 import { makeStyles, createStyles } from "@material-ui/styles";
 
 export default makeStyles((theme : any) => createStyles({
+  tableCellContract: {
+    verticalAlign: "top",
+    paddingTop: 6,
+    paddingBottom: 6,
+    fontSize: "0.75rem",
+    maxWidth: 15,
+    overflow : "hidden",
+    textOverflow: "ellipsis"
+  },
   tableCell: {
     verticalAlign: "top",
     paddingTop: 6,

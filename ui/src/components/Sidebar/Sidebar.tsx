@@ -10,21 +10,22 @@ import ListIcon from "@material-ui/icons/List";
 import useStyles from "./styles";
 
 type SidebarLinkProps = {
-  path : string
-  icon : JSX.Element
-  label : string
-  location : Location<unknown>
+  path: string
+  icon: JSX.Element
+  label: string
+  location: Location<unknown>
 }
 
-const Sidebar = ({ location } : RouteComponentProps) => {
+const Sidebar = ({ location }: RouteComponentProps) => {
   const classes = useStyles();
 
   return (
     <Drawer open variant="permanent" className={classes.drawer} classes={{ paper: classes.drawer }}>
       <div className={classes.toolbar} />
       <List style={{ width: "100%" }}>
-        <SidebarLink key={1} label="WholeSale Contract" path="/app/wholesale" icon={(<ListIcon />)} location={location} />
-        <SidebarLink key={2} label="EF Contract" path="/app/retail" icon={(<ListIcon />)} location={location} />
+
+        <SidebarLink key={1} label="EF Contract" path="/app/retail" icon={(<ListIcon />)} location={location} />
+        <SidebarLink key={2} label="WholeSale Contract" path="/app/wholesale" icon={(<ListIcon />)} location={location} />
         <SidebarLink key={3} label="Funding Request" path="/app/fundingrequest" icon={(<ListIcon />)} location={location} />
         <SidebarLink key={4} label="Funding Approved" path="/app/fundingapproved" icon={(<ListIcon />)} location={location} />
       </List>
@@ -32,7 +33,7 @@ const Sidebar = ({ location } : RouteComponentProps) => {
   );
 };
 
-const SidebarLink = ({ path, icon, label, location } : SidebarLinkProps) => {
+const SidebarLink = ({ path, icon, label, location }: SidebarLinkProps) => {
   const classes = useStyles();
   const active = path && (location.pathname === path || location.pathname.indexOf(path) !== -1);
 

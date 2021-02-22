@@ -69,7 +69,7 @@ template EFContract with
 
    
     controller originator can 
-      FundingRequest : ContractId FundingContractRequest
+      nonconsuming FundingRequest : ContractId FundingContractRequest
        with 
          newLessor: Party
          newFee: Decimal
@@ -98,11 +98,10 @@ template FundingContractRequest with
 
 
     controller lessor can 
-      FundingApproval : ContractId FundingContractApproval
+      nonconsuming FundingApproval : ContractId FundingContractApproval
        with 
          selectedlessor : Party
          newFundingDate : Date
-         newDealerCommission : Decimal
          newFundingRequestId : Text
 
         do 
@@ -113,13 +112,12 @@ template FundingContractRequest with
             fundingRequest = this
             fundingRequestId = newFundingRequestId
             fundingStatus = Funded
-            dealerCommission = newDealerCommission
+          
 
 template FundingContractApproval with
  
     lessor :  Party
     fundingDate : Date
-    dealerCommission: Decimal
     fundingRequest : FundingContractRequest
     fundingRequestId : Text
     fundingStatus: FundingStatus
