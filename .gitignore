@@ -3,3 +3,6 @@
 /ui/daml.js
 /ui/yarn.lock
 sandbox.log
+.env
+*.zip
+navigator.log
