@@ -13,7 +13,7 @@ dependencies:
 sandbox-options:
 - --wall-clock-time
 - --ledgerid=ef-app
-start-navigator: false
+start-navigator: true
 codegen:
   js:
     output-directory: ui/daml.js

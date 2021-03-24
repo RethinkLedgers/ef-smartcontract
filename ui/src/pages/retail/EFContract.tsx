@@ -149,9 +149,9 @@ export default function EFContractList() {
 
         <Table size="small">
           <TableHead>
-            <div>
+            {/* <div>
               <p>RetailContracts</p>
-            </div>
+            </div> */}
             <TableRow>
               <TableCell key={0}> Contract</TableCell>
               <TableCell key={1}> Originator</TableCell>
