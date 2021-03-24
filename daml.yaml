@@ -3,9 +3,10 @@ name: ef-app
 version: 0.1.0
 source: daml
 parties:
-- Alice
-- Bob
-- Charlie
+- Business
+- Dealer
+- Originator
+- Lessor
 dependencies:
 - daml-prim
 - daml-stdlib
@@ -13,7 +14,7 @@ dependencies:
 sandbox-options:
 - --wall-clock-time
 - --ledgerid=ef-app
-start-navigator: true
+start-navigator: false
 codegen:
   js:
     output-directory: ui/daml.js

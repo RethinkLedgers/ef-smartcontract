@@ -50,13 +50,13 @@ Navigator will be started at `http://localhost:7500`. You can log in to Navigato
 
 Another way of running the app locally is using the custom UI you can find in the package. If you wish, you can tweak this UI yourself. 
 
-In this case you have to take several steps yourself, which are handled automatically whith Navigator.
+In this case you have to take some steps yourself, which are handled automatically whith Navigator.
 
 In the `daml.yaml` file set `start-navigator: false`.
 
 ### Start Sandbox
 
-From the project root, run the following command in your terminal. It will build the DAR file, which is an archived version of your Daml contract template package, and start Sanbox which is an in-memory implementation of a Daml ledger:
+From the project root, run the following command in your terminal. It will build the DAR file, which is an archived version of your Daml contract template package, will generate JavaScript files which are neede by the UI, and start Sanbox which is an in-memory implementation of a Daml ledger:
 
 ```shell
 daml start
@@ -70,21 +70,7 @@ The DAR file will be placed into the the following folder, with the following fi
 
 In this case you don't have to do anything with the DAR file.
 
-### Set the proxy
-
-Make sure that you have the following line in your `package.json`:
-
-```
-"proxy": "http://localhost:7575",
-```
-
 ### Build and start the UI
-
-From the project root run the following command in your terminal for generating javascript files needed by the UI form your Daml model:
-
-```
-daml codegen js
-```
 
 From the <project root>/ui folder run the following command in your terminal:
 
@@ -104,9 +90,9 @@ After Yarn has started the server, you can use your UI on `localhost:3000`.
 
 Log in with a party name hou wish to use. You don't need any password.
 
-## Run the app on project:DABL
+## Run the app on Daml Hub
 
-You can run this app on [project:DABL](https://docs.projectdabl.com), Digital Asset's cloud platform, as an SaaS application.
+You can run this app on [Daml Hub](https://hub.daml.com/), Digital Asset's cloud platform, as an SaaS application.
 
 You need to make the following steps:
 
