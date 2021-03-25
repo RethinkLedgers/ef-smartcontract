@@ -133,7 +133,7 @@ export default function EFContractList() {
     async function onClose(state: FundingRequest | null) {
       setRequestProps({ ...defaultRequestProps, open: false });
       if (!state) return;
-      await ledger.exercise(EF.EFContract.FundingRequest, asset.contractId, state);
+      await ledger.exercise(EF.EFContract.FundingRequest, asset.contractId, {...state, newLessor: partyIdentifier(state.newLessor)}); //BGY
     };
     setRequestProps({ ...defaultRequestProps, open: true, onClose })
   };

@@ -1,8 +1,8 @@
-sdk-version: 1.11.1
+sdk-version: 1.9.0
 name: ef-app
 version: 0.1.0
 source: daml
-init-script: EF:setup
+init-script: EF:test
 parties:
 - ledger-party-business
 - ledger-party-dealer

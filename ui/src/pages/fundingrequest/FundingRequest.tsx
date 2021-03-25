@@ -51,7 +51,7 @@ export default function FundingRequestList() {
       async function onClose(state : FundingApproval | null) {
         setApprovalProps({ ...defaultApprovalProps, open: false});
         if (!state) return;
-        await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, state);
+        await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, {...state, selectedlessor: partyIdentifier(state.selectedlessor)}); //BGY
         /* await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, {...state, selectedlessor: partyIdentifier(state.selectedlessor)}); */
       };
       setApprovalProps({ ...defaultApprovalProps, open: true, onClose})
@@ -82,7 +82,7 @@ export default function FundingRequestList() {
               <TableRow key={a.contractId} className={classes.tableRow}>
                 <TableCell key={0} className={classes.tableCellContract}>{a.contractId}</TableCell>
                 <TableCell key={1} className={classes.tableCell}>{displayName(a.payload.lessor)}</TableCell>
-                <TableCell key={2} className={classes.tableCell}>{a.payload.fundingContract.originator}</TableCell>
+                <TableCell key={2} className={classes.tableCell}>{displayName(a.payload.fundingContract.originator)}</TableCell>
                 <TableCell key={3} className={classes.tableCell}>{a.payload.fundingContract.business}</TableCell>
                 <TableCell key={4} className={classes.tableCell}>{a.payload.fundingContract.amount}</TableCell>
                 <TableCell key={5} className={classes.tableCellContract}>{a.payload.fundingContractId}</TableCell>

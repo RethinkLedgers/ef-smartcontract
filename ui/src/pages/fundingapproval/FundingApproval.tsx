@@ -7,11 +7,13 @@ import TableBody from "@material-ui/core/TableBody";
 import { useStreamQueries,  } from "@daml/react";
 import { EF } from '@daml.js/ef-app/lib';
 import useStyles from "./styles";
+import { useKnownParties } from '../../UseKnownParties'; // BGY
 
 
 export default function FundingApprovalList() {
-    const assets = useStreamQueries(EF.FundingContractApproval).contracts;
-    const classes = useStyles();
+  const assets = useStreamQueries(EF.FundingContractApproval).contracts;
+  const classes = useStyles();
+  const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
    
 
   return (
@@ -36,12 +38,12 @@ export default function FundingApprovalList() {
       {assets.map(a => (
         <TableRow key={a.contractId} className={classes.tableRow}>
           <TableCell key={0} className={classes.tableCellContract}>{a.contractId}</TableCell>
-          <TableCell key={1} className={classes.tableCell}>{a.payload.lessor}</TableCell>
+          <TableCell key={1} className={classes.tableCell}>{displayName(a.payload.lessor)}</TableCell>
           <TableCell key={2} className={classes.tableCell}>{a.payload.fundingDate}</TableCell>
           <TableCell key={3} className={classes.tableCellContract}>{a.payload.fundingRequestId}</TableCell>
           <TableCell key={4} className={classes.tableCell}>{a.payload.fundingRequest.fundingContract.amount}</TableCell>
-          <TableCell key={5} className={classes.tableCell}>{a.payload.fundingRequest.fundingContract.originator}</TableCell>
-          <TableCell key={6} className={classes.tableCell}>{a.payload.fundingRequest.fundingContract.business}</TableCell>
+          <TableCell key={5} className={classes.tableCell}>{displayName(a.payload.fundingRequest.fundingContract.originator)}</TableCell>
+          <TableCell key={6} className={classes.tableCell}>{displayName(a.payload.fundingRequest.fundingContract.business)}</TableCell>
           <TableCell key={7} className={classes.tableCellContract}>{a.payload.fundingRequest.fundingContractId}</TableCell>
           <TableCell key={8} className={classes.tableCell}>{a.payload.fundingRequest.fundingContract.rate}</TableCell>
           <TableCell key={9} className={classes.tableCell}>{a.payload.fundingRequest.fundingContract.eftype}</TableCell>

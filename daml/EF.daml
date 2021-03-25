@@ -173,10 +173,18 @@ test = do
                     dealerCommission = Some 5000.0 
                     ..
 
-  submit originator $ exerciseCmd efContract FundingRequest 
+  fundingRequest <- submit originator $ exerciseCmd efContract FundingRequest 
                         with 
                           newLessor = lessor 
                           newFee = 1000.0
-                          newFundingContractId = "1234"
+                          newFundingContractId = "1234" 
+
+  submit lessor $ exerciseCmd fundingRequest FundingApproval 
+                    with 
+                      selectedlessor = lessor
+                      newFundingDate = date 2021 Mar 31
+                      newFundingRequestId = "102030"
+
+                
 
   pure ()

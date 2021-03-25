@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "@daml.js/ef-app": "file:daml.js/ef-app-0.1.0",
-    "@daml/ledger": "1.11.1",
-    "@daml/react": "1.11.1",
-    "@daml/types": "1.11.1",
+    "@daml/ledger": "1.9.0",
+    "@daml/react": "1.9.0",
+    "@daml/types": "1.9.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.3.0",
