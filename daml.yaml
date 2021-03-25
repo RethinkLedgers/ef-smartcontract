@@ -1,20 +1,23 @@
-sdk-version: 1.9.0
+sdk-version: 1.11.1
 name: ef-app
 version: 0.1.0
 source: daml
+init-script: EF:setup
 parties:
-- Business
-- Dealer
-- Originator
-- Lessor
+- ledger-party-business
+- ledger-party-dealer
+- ledger-party-originator
+- ledger-party-lessor
 dependencies:
 - daml-prim
 - daml-stdlib
 - daml-trigger
+- daml-script
 sandbox-options:
 - --wall-clock-time
 - --ledgerid=ef-app
-start-navigator: false
+- --implicit-party-allocation=false
+start-navigator: true
 codegen:
   js:
     output-directory: ui/daml.js

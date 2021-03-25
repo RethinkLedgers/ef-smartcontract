@@ -7,12 +7,15 @@ import Typography from "@material-ui/core/Typography";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import { useUserDispatch, signOut, useUserState } from "../../context/UserContext";
 import useStyles from "./styles";
+import { useKnownParties } from '../../UseKnownParties'; // BGY
 
 const Header = ({ history } : RouteComponentProps) => {
   const classes = useStyles();
 
   const userState = useUserState();
   const userDispatch = useUserDispatch();
+
+  const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -21,7 +24,7 @@ const Header = ({ history } : RouteComponentProps) => {
           DAML App Template
         </Typography>
         <div className={classes.grow} />
-        { userState.isAuthenticated && <Typography variant="h6">User: {userState.party}</Typography> }
+        { userState.isAuthenticated && <Typography variant="h6">User: {displayName(userState.party)}</Typography> } {/*BGY*/}
         <IconButton
           aria-haspopup="true"
           color="inherit"

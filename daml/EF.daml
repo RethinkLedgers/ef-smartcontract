@@ -4,6 +4,8 @@
 
 
 module EF where
+import Daml.Script
+import DA.Date
 
 data EFType = Lease | Loan 
   deriving (Eq, Show)
@@ -129,3 +131,52 @@ template FundingContractApproval with
 
 
 
+setup : Script ()
+setup = do
+  allocatePartyWithHint "Originator" $ PartyIdHint with partyIdHint = "ledger-party-originator"
+  allocatePartyWithHint "Business" $ PartyIdHint with partyIdHint = "ledger-party-business"
+  allocatePartyWithHint "Dealer" $ PartyIdHint with partyIdHint = "ledger-party-dealer"
+  allocatePartyWithHint "Lessor" $ PartyIdHint with partyIdHint = "ledger-party-lessor"
+
+  pure ()
+
+data EFDetails = EFDetails 
+  with 
+    eftype: EFType
+    startdate : Date
+    duration : Text
+    amount : Decimal
+    rate : Decimal
+    assetType : AssetType
+    vin : Text
+    businessCreditScore: Int
+    dealerCommission: Optional Decimal
+      deriving (Eq, Show) 
+
+test : Script ()
+test = do 
+  originator <- allocatePartyWithHint "Originator" $ PartyIdHint with partyIdHint = "ledger-party-originator"
+  business <- allocatePartyWithHint "Business" $ PartyIdHint with partyIdHint = "ledger-party-business"
+  dealer <- allocatePartyWithHint "Dealer" $ PartyIdHint with partyIdHint = "ledger-party-dealer"
+  lessor <- allocatePartyWithHint "Lessor" $ PartyIdHint with partyIdHint = "ledger-party-lessor"
+
+  efContract <- submit originator $ createCmd EFContract
+                  with 
+                    eftype = Lease
+                    startdate = date 2020 Mar 6
+                    duration = "1yr"
+                    amount = 25000.0
+                    rate = 0.08 : Decimal
+                    assetType = Van
+                    vin = "123456"
+                    businessCreditScore = 600
+                    dealerCommission = Some 5000.0 
+                    ..
+
+  submit originator $ exerciseCmd efContract FundingRequest 
+                        with 
+                          newLessor = lessor 
+                          newFee = 1000.0
+                          newFundingContractId = "1234"
+
+  pure ()

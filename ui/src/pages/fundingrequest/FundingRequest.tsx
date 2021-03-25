@@ -12,6 +12,7 @@ import { EF } from '@daml.js/ef-app/lib';
 import { InputDialog, InputDialogProps } from "./InputDialog";
 import useStyles from "./styles";
 import { ContractId } from "@daml/types";
+import { useKnownParties } from '../../UseKnownParties'; // BGY
 
 export default function FundingRequestList() {
     const assets = useStreamQueries(EF.FundingContractRequest).contracts;
@@ -19,6 +20,7 @@ export default function FundingRequestList() {
     const party = useParty();
     const contractid = ContractId
     const ledger : Ledger = useLedger();
+    const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
 
     const defaultApprovalProps : InputDialogProps<FundingApproval> = {
       open: false,
@@ -50,6 +52,7 @@ export default function FundingRequestList() {
         setApprovalProps({ ...defaultApprovalProps, open: false});
         if (!state) return;
         await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, state);
+        /* await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, {...state, selectedlessor: partyIdentifier(state.selectedlessor)}); */
       };
       setApprovalProps({ ...defaultApprovalProps, open: true, onClose})
     };
@@ -58,7 +61,6 @@ export default function FundingRequestList() {
     return (
       <>
         <InputDialog { ...approvalProps } />
-  
         <Table size="small">
           <TableHead>
             <TableRow className={classes.tableRow}>
@@ -73,14 +75,13 @@ export default function FundingRequestList() {
               <TableCell key={8} className={classes.tableCell}>Asset Type</TableCell>
               <TableCell key={9} className={classes.tableCell}>OriginationFee</TableCell>
               <TableCell key={10} className={classes.tableCell}>Approval</TableCell>
-           
             </TableRow>
           </TableHead>
           <TableBody>
             {assets.map(a => (
               <TableRow key={a.contractId} className={classes.tableRow}>
                 <TableCell key={0} className={classes.tableCellContract}>{a.contractId}</TableCell>
-                <TableCell key={1} className={classes.tableCell}>{a.payload.lessor}</TableCell>
+                <TableCell key={1} className={classes.tableCell}>{displayName(a.payload.lessor)}</TableCell>
                 <TableCell key={2} className={classes.tableCell}>{a.payload.fundingContract.originator}</TableCell>
                 <TableCell key={3} className={classes.tableCell}>{a.payload.fundingContract.business}</TableCell>
                 <TableCell key={4} className={classes.tableCell}>{a.payload.fundingContract.amount}</TableCell>
@@ -92,7 +93,6 @@ export default function FundingRequestList() {
                 <TableCell key={10} className={classes.tableCellButton}>
                   <Button color="primary" size="small" className={classes.choiceButton} variant="contained"  onClick={() => showApproval(a)}>Approval</Button>
                 </TableCell>
-
               </TableRow>
             ))}
           </TableBody>
