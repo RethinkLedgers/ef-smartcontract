@@ -1,0 +1,22 @@
+[
+    {
+        "identifier" : "ledger-party-originator",
+        "displayName" : "Originator",
+        "isLocal" : true
+    },
+    {
+        "identifier" : "ledger-party-business",
+        "displayName" : "Business",
+        "isLocal" : true
+    },
+    {
+        "identifier" : "ledger-party-originator",
+        "displayName" : "Dealer",
+        "isLocal" : true
+    },
+    {
+        "identifier" : "ledger-party-originator",
+        "displayName" : "Lessor",
+        "isLocal" : true
+    }
+]

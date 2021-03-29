@@ -8,7 +8,7 @@ import { useLedger, useParty } from '@daml/react';
 import Ledger, { PartyInfo } from '@daml/ledger';
 
 export function useKnownParties () {
-    const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
+    /* const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
     const partyId = useParty();
     const ledger: Ledger = useLedger();
 
@@ -18,7 +18,9 @@ export function useKnownParties () {
         setKnownParties(lst);
     } ;
     getKnownParties()
-    }, [ledger]);
+    }, [ledger]); */
+
+const knownParties : PartyInfo[] = require('./parties.json')
 
     return {
         displayName : (id: string | undefined): string => {
