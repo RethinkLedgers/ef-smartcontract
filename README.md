@@ -72,6 +72,28 @@ In this case you don't have to do anything with the DAR file.
 
 ### Build and start the UI
 
+In the `ui/src/UseKnownParties.tsx` file you should have COMMENTED OUT the following line:
+
+```
+const knownParties : PartyInfo[] = require('./parties.json')
+```
+
+and UNCOMMENTED the following section:
+
+```
+const partyId = useParty();
+    const ledger: Ledger = useLedger();
+
+    useEffect(() => {
+    const getKnownParties = async () => {
+        let lst = await ledger.listKnownParties();
+        setKnownParties(lst);
+    } ;
+    getKnownParties()
+```
+
+The section which now you have UNCOMMENTED is the part which normally queries the list of known parties from the ledger. Unfortunatley this is not possible yet on Daml Hub, so until the `ledger.listKnownParties` function becomes available also on Daml Hub, we use a workaround, which you will see in the next section. 
+
 From the <project root>/ui folder run the following command in your terminal:
 
 ```shell
@@ -114,6 +136,34 @@ From the project root run the following command in your terminal for generating 
 daml codegen js
 ```
 
+Log in to project:Dabl, create a new project, and a new ledger. Upload and deploy the DAR file to Daml Hub. 
+
+On the Users tab, create 4 parties for Originator, Business, Dealer and Lessor. 
+
+Copy the party identifiers returned by Daml Hub into the `ui/scr/parties.json` file, into the respective JSOM object as `identifier`. Don't forget to save the file. 
+
+In the `ui/src/UseKnownParties.tsx` file you should have UNCOMMENTED the following line:
+
+```
+const knownParties : PartyInfo[] = require('./parties.json')
+```
+
+and COMMENTED OUT the following section:
+
+```
+const partyId = useParty();
+    const ledger: Ledger = useLedger();
+
+    useEffect(() => {
+    const getKnownParties = async () => {
+        let lst = await ledger.listKnownParties();
+        setKnownParties(lst);
+    } ;
+    getKnownParties()
+```
+
+The section which now you have COMMENTED OUT is the part which normally queries the list of known parties from the ledger. Unfortunatley this is not possible yet on Daml Hub, so until the `ledger.listKnownParties` function becomes available also on Daml Hub, we use this workaround. 
+
 From the <project root>/ui folder run the following command in your terminal:
 
 ```shell
@@ -128,19 +178,9 @@ yarn build
 
 Yarn will create a `build` folder under the `ui` folder. Zip the `build` folder.
 
-Log in to project:Dabl, create a new project, and a new ledger. 
+You can navigate to the deoployed application by clicking on the `View Site` button on the Deployments tab. 
 
-Upload and deploy the created `.daml/dist/ef-app-0.1.0.dar` file and the zipped `build` folder.
+You can log in to the application by the user names (not the displaynames specified in the `parties.json` file!) and the JWT tokens returned by Daml Hub. 
 
-Select `Users` in the left hand menu, and create four parties with the `Add Party` button, e.g. "Business", "Dealer", "Originator", "Lessor".
-
-Download the `parties.json` file with the `Download parties.json` button. In this file you will find the security tokens you need to use for login on beahlf of the parties. You have to enter the security tokens in the `Password` field of the login screen. 
-
-In the subsequent interactions you will have to use the party IDs created by project:DABL, rather than the party names you have specified. This is true for login as well as contract creation. 
-
-You can copy the party IDs to your clipboard on the `Users` page, by pressing the clipboard icon.
-
-You can navigate to the application web page form the `Deployments` page with by pressing the `View Site` button.
-
-Once you have logged in on behalf of a party, you can create that type of contracts which require that party as a signatory.
+Once logged in, you will see the display names displayed by the UI, and you have to enter the display names of the parties into the UI when referencing the ledger parties. 
 
