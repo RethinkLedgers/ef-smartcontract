@@ -1,21 +1,21 @@
 [
     {
-        "identifier" : "ledger-party-originator",
+        "identifier" : "ledger-party-9e384d54-b5c6-495f-8a1c-f4341bf6f42c",
         "displayName" : "Originator",
         "isLocal" : true
     },
     {
-        "identifier" : "ledger-party-business",
+        "identifier" : "ledger-party-cc934b63-178b-4bdc-abaf-c840f2a54f09",
         "displayName" : "Business",
         "isLocal" : true
     },
     {
-        "identifier" : "ledger-party-originator",
+        "identifier" : "ledger-party-833cc98d-61f5-4480-8afe-2a38949f0347",
         "displayName" : "Dealer",
         "isLocal" : true
     },
     {
-        "identifier" : "ledger-party-originator",
+        "identifier" : "ledger-party-d07e5584-f978-4b1b-ac49-6037393effdf",
         "displayName" : "Lessor",
         "isLocal" : true
     }
