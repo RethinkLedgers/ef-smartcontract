@@ -28,16 +28,6 @@ One way to run the app loacally is using the automatically generated Navigator U
 
 In the `daml.yaml` file set `start-navigator: true`.
 
-Make sure your `daml.yaml` file contains the following lines for the interacting parties (if you want to use different user names, put that names into the file):
-
-```
-parties:
-- Business
-- Dealer
-- Originator
-- Lessor
-```
-
 From the project root run the following command in your terminal:
 
 ```shell
@@ -45,6 +35,13 @@ daml start
 ```
 
 Navigator will be started at `http://localhost:7500`. You can log in to Navigator UI by choosing a party from the dropdown menu, and start creating contracts and exercising choices on existing contracts.
+
+The Daml file contains an initialization script which allocates parties with different display names and party identifiers, e.g.:
+
+displayName = Origintor
+party identifier = ledger-party-originator
+
+In the Navigator UI you have to refer to the parties by the party identifiers.
 
 ## Run the app locally with the custom UI
 
@@ -92,7 +89,18 @@ const partyId = useParty();
     getKnownParties()
 ```
 
-The section which now you have UNCOMMENTED is the part which normally queries the list of known parties from the ledger. Unfortunatley this is not possible yet on Daml Hub, so until the `ledger.listKnownParties` function becomes available also on Daml Hub, we use a workaround, which you will see in the next section. 
+In the Daml ledger model, party objects contain a party identifier and an optional display name, which can be (but not must be) different from the party identifier. In some ledgers the party identifiers are enforced to be long strings, which makes them inconvenient to use on the UI. The section which now you have UNCOMMENTED is the part of the UI code which queries from the ledger the list of party objects for the known parties. Another part of the UI code converts party identifiers to display names for display, and converts display names to party identifiers for entering party names on the UI. 
+
+In the initializatin script, as mentioned above, we have allocated parties with different display names and party identifiers, e.g.:
+
+displayName = Origintor
+party identifier = ledger-party-originator
+
+This means, when starting up the application, you alaready have four parties allocated. 
+
+You have to use party identifiers to log in, and see the display name of the logged in party on th UI, and have to use party display names to refer to other parties on the UI.
+
+Unfortunatley the distinction between party identifiers and display names is not possible yet on Daml Hub, so until this feature becomes available also on Daml Hub, we use a workaround, which you will see in the next section. 
 
 From the <project root>/ui folder run the following command in your terminal:
 
@@ -138,9 +146,9 @@ daml codegen js
 
 Log in to project:Dabl, create a new project, and a new ledger. Upload and deploy the DAR file to Daml Hub. 
 
-On the Users tab, create 4 parties for Originator, Business, Dealer and Lessor. 
+On the Users tab, create 4 parties for Originator, Business, Dealer and Lessor. (Note that unlike described above, the initializatin scipt doesn't run automatically on Daml Hub. So after uploading the Dar file and starting the ledger, you won't have the parties allocated specified in the init script.)
 
-Copy the party identifiers returned by Daml Hub into the `ui/scr/parties.json` file, into the respective JSOM object as `identifier`. Don't forget to save the file. 
+Copy the party identifiers returned by Daml Hub into the `ui/scr/parties.json` file, into the respective JSON object, which already contains the respective party display names. Don't forget to save the file. 
 
 In the `ui/src/UseKnownParties.tsx` file you should have UNCOMMENTED the following line:
 
@@ -162,7 +170,15 @@ const partyId = useParty();
     getKnownParties()
 ```
 
-The section which now you have COMMENTED OUT is the part which normally queries the list of known parties from the ledger. Unfortunatley this is not possible yet on Daml Hub, so until the `ledger.listKnownParties` function becomes available also on Daml Hub, we use this workaround. 
+As mentioned before, in the Daml ledger model, party objects contain a party identifier and an optional display name, which can be (but not must be) different from the party identifier. In some ledgers the party identifiers are enforced to be long strings, which makes them inconvenient to use on the UI. 
+
+Unfortunatley the distinction between party identifiers and display names is not possible yet on Daml Hub, so until this feature becomes available also on Daml Hub, we use the workaround, described above. 
+
+The section which now you have UNCOMMENTED imports the `parties.json` file into the UI. The contents of the JSON file corresponds to the query of the list of known parties, resulting in a list of party objects, simulating that feature of ledgers other than Daml Hub, wich makes is possible to use the more convenient display names on the UI, rathen than the party identifiers. The remaining part of the UI, including the functions which convert between party identifiers and display names, works in the same way as described above.
+
+You have to use party identifiers to log in, and see the display name of the logged in party on th UI, and have to use party display names to refer to other parties on the UI.
+
+
 
 From the <project root>/ui folder run the following command in your terminal:
 
