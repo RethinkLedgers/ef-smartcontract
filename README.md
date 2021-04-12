@@ -120,6 +120,7 @@ After Yarn has started the server, you can use your UI on `localhost:3000`.
 
 Log in with a party name hou wish to use. You don't need any password.
 
+
 ## Run the app on Daml Hub
 
 You can run this app on [Daml Hub](https://hub.daml.com/), Digital Asset's cloud platform, as an SaaS application.
@@ -199,4 +200,6 @@ You can navigate to the deoployed application by clicking on the `View Site` but
 You can log in to the application by the user names (not the displaynames specified in the `parties.json` file!) and the JWT tokens returned by Daml Hub. 
 
 Once logged in, you will see the display names displayed by the UI, and you have to enter the display names of the parties into the UI when referencing the ledger parties. 
+
+=======
 
