@@ -11,6 +11,7 @@ import { WholesaleContract } from "@daml.js/ef-app/lib/EF";
 import { CloseWholeSaleContract } from "@daml.js/ef-app/lib/EF";
 import { InputDialog, InputDialogProps } from "./InputDialog";
 import useStyles from "./styles";
+import { useKnownParties } from '../../UseKnownParties'; // BGY
 
 
 
@@ -21,6 +22,7 @@ export default function WholesaleContractList() {
   const party = useParty();
   const ledger: Ledger = useLedger();
   const today = (new Date()).toISOString().slice(0, 10);
+  const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
 
 
   type InputFieldsForNewAsset = Omit<WholesaleContract, "Wholesale Contract">;
@@ -102,7 +104,7 @@ export default function WholesaleContractList() {
     async function onClose(state: InputFieldsForNewAsset | null) {
       setNewAssetProps({ ...defaultNewAssetProps, open: false });
       if (!state) return;
-      const wholesaleData = { ...state };
+      const wholesaleData = { ...state, originator: partyIdentifier(state.originator), dealer: partyIdentifier(state.dealer) }; // BGY
       await ledger.create(EF.WholesaleContract, wholesaleData);
     };
     setNewAssetProps({ ...defaultNewAssetProps, open: true, onClose });
@@ -171,8 +173,8 @@ export default function WholesaleContractList() {
             {assets.map(a => (
               <TableRow key={a.contractId}>
                 <TableCell key={0}  className={classes.tableCellContract}>{a.contractId}</TableCell>
-                <TableCell key={1} >{a.payload.originator}</TableCell>
-                <TableCell key={2} >{a.payload.dealer}</TableCell>
+                <TableCell key={1} >{displayName(a.payload.originator)}</TableCell>
+                <TableCell key={2} >{displayName(a.payload.dealer)}</TableCell>
                 <TableCell key={3} >{a.payload.eftype}</TableCell>
                 <TableCell key={4} >{a.payload.amount}</TableCell>
                 <TableCell key={5} >{a.payload.rate}</TableCell>
