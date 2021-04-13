@@ -3,11 +3,19 @@
 // Within the component:
 // const {displayName, partyIdentifier} = useKnownParties () 
 
+// YOU NEED THESE IMPORTS FOR RUNNING LOCALLY - START
 import React, { useEffect } from 'react';
-import { useLedger } from '@daml/react';
+import { useLedger, useParty } from '@daml/react';
 import Ledger, { PartyInfo } from '@daml/ledger';
+// YOU NEED THESE IMPORTS FOR RUNNING LOCALLY - END
+
+// YOU NEED THIS IMPORT FOR RUNNING ON DAML HB - START
+/* import { PartyInfo } from '@daml/ledger';  */
+// YOU NEED THIS IMPORT FOR RUNNING ON DAML HB - END
 
 export function useKnownParties () {
+
+    // YOU NEED THIS PART FOR RUNNING LOCALLY - START
     const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
     const ledger: Ledger = useLedger();
 
@@ -18,6 +26,11 @@ export function useKnownParties () {
     } ;
     getKnownParties()
     }, [ledger]);
+    // YOU NEED THIS PART FOR RUNNING LOCALLY - END
+
+    // YOU NEED THIS PART FOR RUNNING ON DAML HUB - START
+    /* const knownParties : PartyInfo[] = require('./parties.json') */
+    // YOU NEED THIS PART FOR RUNNING ON DAML HUB - END
 
     return {
         displayName : (id: string ): string => {
