@@ -20,21 +20,13 @@ export function useKnownParties () {
     }, [ledger]);
 
     return {
-        displayName : (id: string | undefined): string => {
-
-            if (id === undefined) {
-            return "";
-            } else {
-            return knownParties.filter(x => x.identifier === id)[0]?.displayName || id 
-            }},
-        partyIdentifier : (displayName: string | undefined): string => {
-            let filterResult = knownParties.filter(x => x.displayName === displayName)
-            if (filterResult === []) {
-                throw new Error("Party display name doesn't exist")
-            } else {
-                return filterResult[0].identifier
-            }},
-        knownPartyDisplayNames: knownParties.map(x => x.displayName || x.identifier)
+        displayName : (id: string ): string => {
+            return knownParties.filter((x : PartyInfo) => x.identifier === id)[0]?.displayName || id 
+            },
+        partyIdentifier : (displayName: string): string => {
+            return knownParties.filter((x : PartyInfo) => x.displayName === displayName)[0]?.identifier || displayName 
+            },
+        knownPartyDisplayNames: knownParties.map((x : PartyInfo)  => x.displayName || x.identifier)
     }
 
 }
