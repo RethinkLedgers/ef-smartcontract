@@ -3,9 +3,9 @@
 // Within the component:
 // const {displayName, partyIdentifier} = useKnownParties () 
 
-import React, { useEffect } from 'react';
-import { useLedger, useParty } from '@daml/react';
-import Ledger, { PartyInfo } from '@daml/ledger';
+import React, { useEffect } from "react";
+import { useLedger, useParty } from "@daml/react";
+import Ledger, { PartyInfo } from "@daml/ledger";
 
 export function useKnownParties () {
     /* const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
@@ -20,7 +20,7 @@ export function useKnownParties () {
     getKnownParties()
     }, [ledger]); */
 
-const knownParties : PartyInfo[] = require('./parties.json')
+  const knownParties : PartyInfo[] = require('./parties.json')
 
     return {
         displayName : (id: string | undefined): string => {
