@@ -38,7 +38,7 @@ Navigator will be started at `http://localhost:7500`. You can log in to Navigato
 
 The Daml file contains an initialization script which allocates parties with different display names and party identifiers, e.g.:
 
-displayName = Origintor
+displayName = Originator
 party identifier = ledger-party-originator
 
 In the Navigator UI you have to refer to the parties by the party identifiers.
