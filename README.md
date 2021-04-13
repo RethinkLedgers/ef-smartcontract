@@ -38,7 +38,7 @@ Navigator will be started at `http://localhost:7500`. You can log in to Navigato
 
 The Daml file contains an initialization script which allocates parties with different display names and party identifiers, e.g.:
 
-displayName = Origintor
+displayName = Originator
 party identifier = ledger-party-originator
 
 In the Navigator UI you have to refer to the parties by the party identifiers.
@@ -93,7 +93,7 @@ In the Daml ledger model, party objects contain a party identifier and an option
 
 In the initializatin script, as mentioned above, we have allocated parties with different display names and party identifiers, e.g.:
 
-displayName = Origintor
+displayName = Originator
 party identifier = ledger-party-originator
 
 This means, when starting up the application, you alaready have four parties allocated. 
@@ -123,7 +123,7 @@ Log in with a party name hou wish to use. You don't need any password.
 
 ## Run the app on Daml Hub
 
-You can run this app on [Daml Hub](https://hub.daml.com/), Digital Asset's cloud platform, as an SaaS application.
+You can run this app on [Daml Hub](https://hub.daml.com/), Digital Asset's cloud platform, as a SaaS application.
 
 You need to make the following steps:
 
@@ -193,9 +193,19 @@ After the installation has finished:
 yarn build
 ```
 
-Yarn will create a `build` folder under the `ui` folder. Zip the `build` folder.
+Yarn will create a `build` folder under the `ui` folder. 
+Zip the `build` folder.
 
-You can navigate to the deoployed application by clicking on the `View Site` button on the Deployments tab. 
+```shell
+zip -r ../ef-app-ui.zip build
+```
+
+Login to hub.daml.com
+
+Instructions to deploy an app on hub.daml can be found here -> https://projectdabl.com/docs/quickstart/#deployments
+
+You can navigate to the deployed application by clicking on the `View Site` button on the Deployments tab. 
+
 
 You can log in to the application by the user names (not the displaynames specified in the `parties.json` file!) and the JWT tokens returned by Daml Hub. 
 
