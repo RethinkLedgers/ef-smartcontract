@@ -9,7 +9,6 @@ import Ledger, { PartyInfo } from '@daml/ledger';
 
 export function useKnownParties () {
     const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
-    const partyId = useParty();
     const ledger: Ledger = useLedger();
 
     useEffect(() => {
