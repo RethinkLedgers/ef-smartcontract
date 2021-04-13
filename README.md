@@ -28,16 +28,6 @@ One way to run the app loacally is using the automatically generated Navigator U
 
 In the `daml.yaml` file set `start-navigator: true`.
 
-Make sure your `daml.yaml` file contains the following lines for the interacting parties (if you want to use different user names, put that names into the file):
-
-```
-parties:
-- Business
-- Dealer
-- Originator
-- Lessor
-```
-
 From the project root run the following command in your terminal:
 
 ```shell
