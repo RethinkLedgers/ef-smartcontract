@@ -21,8 +21,7 @@ export default function EFContractList() {
   const classes = useStyles();
   const party = useParty();
   const ledger: Ledger = useLedger();
-  const today = (new Date()).toISOString().slice(0, 10);
-  const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
+  const {displayName, partyIdentifier} = useKnownParties () // BGY
 
 
   type InputFieldsForNewAsset = Omit<EFContract, "EFContract">;

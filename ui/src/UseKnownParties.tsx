@@ -4,7 +4,7 @@
 // const {displayName, partyIdentifier} = useKnownParties () 
 
 import React, { useEffect } from 'react';
-import { useLedger, useParty } from '@daml/react';
+import { useLedger } from '@daml/react';
 import Ledger, { PartyInfo } from '@daml/ledger';
 
 export function useKnownParties () {

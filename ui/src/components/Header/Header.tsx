@@ -15,7 +15,7 @@ const Header = ({ history } : RouteComponentProps) => {
   const userState = useUserState();
   const userDispatch = useUserDispatch();
 
-  const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
+  const {displayName} = useKnownParties () // BGY
 
   return (
     <AppBar position="fixed" className={classes.appBar}>

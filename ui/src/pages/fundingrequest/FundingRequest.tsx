@@ -11,16 +11,14 @@ import { FundingApproval, FundingContractRequest  } from "@daml.js/ef-app/lib/EF
 import { EF } from '@daml.js/ef-app/lib';
 import { InputDialog, InputDialogProps } from "./InputDialog";
 import useStyles from "./styles";
-import { ContractId } from "@daml/types";
 import { useKnownParties } from '../../UseKnownParties'; // BGY
 
 export default function FundingRequestList() {
     const assets = useStreamQueries(EF.FundingContractRequest).contracts;
     const classes = useStyles();
     const party = useParty();
-    const contractid = ContractId
     const ledger : Ledger = useLedger();
-    const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
+    const {displayName, partyIdentifier} = useKnownParties () // BGY
 
     const defaultApprovalProps : InputDialogProps<FundingApproval> = {
       open: false,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -13,7 +13,7 @@ import { useKnownParties } from '../../UseKnownParties'; // BGY
 export default function FundingApprovalList() {
   const assets = useStreamQueries(EF.FundingContractApproval).contracts;
   const classes = useStyles();
-  const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
+  const {displayName} = useKnownParties () // BGY
    
 
   return (
