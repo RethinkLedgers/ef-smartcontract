@@ -3,13 +3,20 @@
 // Within the component:
 // const {displayName, partyIdentifier} = useKnownParties () 
 
-import React, { useEffect } from "react";
-import { useLedger, useParty } from "@daml/react";
-import Ledger, { PartyInfo } from "@daml/ledger";
+// YOU NEED THESE IMPORTS FOR RUNNING LOCALLY - START
+import React, { useEffect } from 'react';
+import { useLedger, useParty } from '@daml/react';
+import Ledger, { PartyInfo } from '@daml/ledger';
+// YOU NEED THESE IMPORTS FOR RUNNING LOCALLY - END
+
+// YOU NEED THIS IMPORT FOR RUNNING ON DAML HB - START
+/* import { PartyInfo } from '@daml/ledger';  */
+// YOU NEED THIS IMPORT FOR RUNNING ON DAML HB - END
 
 export function useKnownParties () {
-    /* const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
-    const partyId = useParty();
+
+    // YOU NEED THIS PART FOR RUNNING LOCALLY - START
+    const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
     const ledger: Ledger = useLedger();
 
     useEffect(() => {
@@ -18,26 +25,21 @@ export function useKnownParties () {
         setKnownParties(lst);
     } ;
     getKnownParties()
-    }, [ledger]); */
+    }, [ledger]);
+    // YOU NEED THIS PART FOR RUNNING LOCALLY - END
 
-  const knownParties : PartyInfo[] = require('./parties.json')
+    // YOU NEED THIS PART FOR RUNNING ON DAML HUB - START
+    /* const knownParties : PartyInfo[] = require('./parties.json') */
+    // YOU NEED THIS PART FOR RUNNING ON DAML HUB - END
 
     return {
-        displayName : (id: string | undefined): string => {
-
-            if (id === undefined) {
-            return "";
-            } else {
-            return knownParties.filter(x => x.identifier === id)[0]?.displayName || id 
-            }},
-        partyIdentifier : (displayName: string | undefined): string => {
-            let filterResult = knownParties.filter(x => x.displayName === displayName)
-            if (filterResult === []) {
-                throw new Error("Party display name doesn't exist")
-            } else {
-                return filterResult[0].identifier
-            }},
-        knownPartyDisplayNames: knownParties.map(x => x.displayName || x.identifier)
+        displayName : (id: string ): string => {
+            return knownParties.filter((x : PartyInfo) => x.identifier === id)[0]?.displayName || id 
+            },
+        partyIdentifier : (displayName: string): string => {
+            return knownParties.filter((x : PartyInfo) => x.displayName === displayName)[0]?.identifier || displayName 
+            },
+        knownPartyDisplayNames: knownParties.map((x : PartyInfo)  => x.displayName || x.identifier)
     }
 
 }
