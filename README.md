@@ -1,4 +1,4 @@
-# Introduction to Smart Contracts for Equipment Finance
+# Introduction to DAML Smart Contracts for Equipment Finance
 
 ## Overview
 
