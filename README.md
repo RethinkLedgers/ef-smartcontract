@@ -46,10 +46,10 @@ daml start
 Navigator will be started at `http://localhost:7500`. You can log in to Navigator UI by choosing a party from the dropdown menu, and start creating contracts and exercising choices on existing contracts.
 
 The Daml file contains an initialization script which allocates parties with different display names and party identifiers, e.g.:
-
-displayName = Originator
+```shell
+displayName = Originator 
 party identifier = ledger-party-originator
-
+```
 In the Navigator UI you have to refer to the parties by the party identifiers.
 
 ## Run the app locally with the custom UI
