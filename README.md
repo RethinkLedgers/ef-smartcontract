@@ -14,6 +14,15 @@ Be sure you have the following installed:
 - [Yarn](https://classic.yarnpkg.com/en/)
 - A terminal application for command line interaction
 
+Note this applications uses DAML SDK 1.9.0 but can easily be upgraded to the latest version.
+To upgrade, update ui/package.json file with the following entries
+
+```shell
+"@daml/ledger": "x.x.x",
+"@daml/react": "x.x.x",
+"@daml/types": "x.x.x",
+```
+
 ## Clone this repo
 
 Run the following command in your terminal:
