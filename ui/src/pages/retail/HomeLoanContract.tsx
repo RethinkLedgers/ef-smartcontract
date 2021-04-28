@@ -15,9 +15,9 @@ import { useKnownParties } from '../../UseKnownParties'; // BGY
 
 
 
-export default function EFContractList() {
+export default function HomeLoanContractList() {
 
-  const retailcontracts = useStreamQueries(EF.EFContract).contracts;
+  const retailcontracts = useStreamQueries(EF.HomeLoanContract).contracts;
   const classes = useStyles();
   const party = useParty();
   const ledger: Ledger = useLedger();
@@ -31,16 +31,15 @@ export default function EFContractList() {
     title: "New RetailContract",
     defaultValue: {
       originator: party,
-      business: party,
-      eftype: "Lease",
+      homeowner: party,
+      loantype: "ARM",
       startdate: "",
       duration: "",
       amount: "0",
       rate: "0.0",
-      assetType: "Van",
-      vin: "",
-      businessCreditScore: "",
-      dealerCommission: "",
+      assetType: "House",
+      creditScore: "",
+      commission: "",
     },
     fields: {
       originator: {
@@ -51,10 +50,10 @@ export default function EFContractList() {
         label: "Business",
         type: "text"
       },
-      eftype: {
-        label: "EF Type",
+      homeloantype: {
+        label: "Home Loan Type",
         type: "selection",
-        items: ["Loan", "Lease"]
+        items: ["ARM", "Fixed"]
       },
       startdate: {
         label: "Contract Date",
@@ -63,7 +62,7 @@ export default function EFContractList() {
       duration: {
         label: "Duration",
         type: "selection",
-        items: ["3yr", "1yr"]
+        items: ["30yr", "10yr"]
       },
       amount: {
         label: "Amount",
@@ -76,17 +75,13 @@ export default function EFContractList() {
       assetType: {
         label: "Asset Type",
         type: "selection",
-        items: ["Van", "Tractor"]
+        items: ["House", "Condo"]
       },
-      vin: {
-        label: "Vin",
-        type: "text"
-      },
-      businessCreditScore: {
-        label: "Business Score",
+      creditScore: {
+        label: "Credit Score",
         type: "number"
       },
-      dealerCommission: {
+      commission: {
         label: "Commission",
         type: "number"
       }
@@ -99,7 +94,7 @@ export default function EFContractList() {
       setNewAssetProps({ ...defaultNewAssetProps, open: false });
       if (!state) return;
       const efData = { ...state, originator:  partyIdentifier(state.originator), business: partyIdentifier(state.business)}; // BGY
-      await ledger.create(EF.EFContract, efData);
+      await ledger.create(EF.HomeLoanContract, efData);
     };
     setNewAssetProps({ ...defaultNewAssetProps, open: true, onClose });
   };
@@ -108,10 +103,10 @@ export default function EFContractList() {
   const defaultRequestProps: InputDialogProps<FundingRequest> = {
     open: false,
     title: "Funding Request",
-    defaultValue: { newLessor: party,  newFee: "", newFundingContractId: ""},
+    defaultValue: { newGse: party,  newFee: "", newFundingContractId: ""},
     fields: {
       newLessor: {
-        label: "Lessor",
+        label: "GSE",
         type: "text"
       },
       newFee: {
@@ -129,11 +124,11 @@ export default function EFContractList() {
 
   const [requestProps, setRequestProps] = useState(defaultRequestProps);
   // One can pass the original contracts CreateEvent
-  function showRequest(asset: EF.EFContract.CreateEvent) {
+  function showRequest(asset: EF.HomeLoanContract.CreateEvent) {
     async function onClose(state: FundingRequest | null) {
       setRequestProps({ ...defaultRequestProps, open: false });
       if (!state) return;
-      await ledger.exercise(EF.EFContract.FundingRequest, asset.contractId, {...state, newLessor: partyIdentifier(state.newLessor)}); //BGY
+      await ledger.exercise(EF.HomeLoanContract.FundingRequest, asset.contractId, {...state, newLessor: partyIdentifier(state.newLessor)}); //BGY
     };
     setRequestProps({ ...defaultRequestProps, open: true, onClose })
   };
@@ -157,14 +152,13 @@ export default function EFContractList() {
             <TableRow>
               <TableCell key={0}> Contract</TableCell>
               <TableCell key={1}> Originator</TableCell>
-              <TableCell key={2}> Businesss</TableCell>
-              <TableCell key={3}> EF Type</TableCell>
+              <TableCell key={2}> Home Owner</TableCell>
+              <TableCell key={3}> Loan Type</TableCell>
               <TableCell key={4}> Duration</TableCell>
               <TableCell key={5}> Amount</TableCell>
               <TableCell key={6}> Rate</TableCell>
               <TableCell key={7}> Asset Type</TableCell>
-              <TableCell key={8}> Vin</TableCell>
-              <TableCell key={9}> Business Score</TableCell>
+              <TableCell key={9}> Credit Score</TableCell>
               <TableCell key={10}> Commission</TableCell>
               <TableCell key={11} className={classes.tableCell}>Request</TableCell>
             </TableRow>
@@ -175,15 +169,14 @@ export default function EFContractList() {
               <TableRow key={r.contractId}>
                 <TableCell key={0}  className={classes.tableCellContract}>{r.contractId}</TableCell>
                 <TableCell key={1} >{displayName(r.payload.originator)}</TableCell> 
-                <TableCell key={2} >{displayName(r.payload.business)}</TableCell> 
-                <TableCell key={3} >{r.payload.eftype}</TableCell>
+                <TableCell key={2} >{displayName(r.payload.homeowner)}</TableCell> 
+                <TableCell key={3} >{r.payload.homeloantype}</TableCell>
                 <TableCell key={4} >{r.payload.duration}</TableCell>
                 <TableCell key={5} >{r.payload.amount}</TableCell>
                 <TableCell key={6} >{r.payload.rate}</TableCell>
                 <TableCell key={7} >{r.payload.assetType}</TableCell>
-                <TableCell key={8} >{r.payload.vin}</TableCell>
-                <TableCell key={9} >{r.payload.businessCreditScore}</TableCell>
-                <TableCell key={10} >{r.payload.dealerCommission}</TableCell>
+                <TableCell key={9} >{r.payload.creditScore}</TableCell>
+                <TableCell key={10} >{r.payload.commission}</TableCell>
                 <TableCell key={11} className={classes.tableCellButton}>
                   <Button color="primary" size="small" className={classes.choiceButton} variant="contained" onClick={() => showRequest(r)}>Funding Request</Button>
                 </TableCell>

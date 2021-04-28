@@ -25,15 +25,15 @@ export default function FundingRequestList() {
     const defaultApprovalProps : InputDialogProps<FundingApproval> = {
       open: false,
       title: "Funding Approval",
-      defaultValue: {  newFundingDate: "",  selectedlessor: party, newFundingRequestId: ""},
+      defaultValue: {  newFundingDate: "",  selectedgse: party, newFundingRequestId: ""},
       fields :{
         newFundingDate : {
           label: "FundingDate",
           type: "date"
         },
         
-        selectedlessor : {
-          label: "Lessor",
+        selectedGse : {
+          label: "GSE",
           type: "text"
         },
         newFundingRequestId : {
@@ -65,9 +65,9 @@ export default function FundingRequestList() {
           <TableHead>
             <TableRow className={classes.tableRow}>
               <TableCell key={0} className={classes.tableCell}>Contract</TableCell>
-              <TableCell key={1} className={classes.tableCell}>Lessor</TableCell>
+              <TableCell key={1} className={classes.tableCell}>GSE</TableCell>
               <TableCell key={2} className={classes.tableCell}>Originator</TableCell>
-              <TableCell key={3} className={classes.tableCell}>Business</TableCell>
+              <TableCell key={3} className={classes.tableCell}>Home Owner</TableCell>
               <TableCell key={4} className={classes.tableCell}>Amount</TableCell>
               <TableCell key={5} className={classes.tableCell}>EF Contrat</TableCell>
               <TableCell key={6} className={classes.tableCell}>Rate</TableCell>
@@ -81,13 +81,13 @@ export default function FundingRequestList() {
             {assets.map(a => (
               <TableRow key={a.contractId} className={classes.tableRow}>
                 <TableCell key={0} className={classes.tableCellContract}>{a.contractId}</TableCell>
-                <TableCell key={1} className={classes.tableCell}>{displayName(a.payload.lessor)}</TableCell>
+                <TableCell key={1} className={classes.tableCell}>{displayName(a.payload.gse)}</TableCell>
                 <TableCell key={2} className={classes.tableCell}>{displayName(a.payload.fundingContract.originator)}</TableCell>
-                <TableCell key={3} className={classes.tableCell}>{a.payload.fundingContract.business}</TableCell>
+                <TableCell key={3} className={classes.tableCell}>{a.payload.fundingContract.homeowner}</TableCell>
                 <TableCell key={4} className={classes.tableCell}>{a.payload.fundingContract.amount}</TableCell>
                 <TableCell key={5} className={classes.tableCellContract}>{a.payload.fundingContractId}</TableCell>
                 <TableCell key={6} className={classes.tableCell}>{a.payload.fundingContract.rate}</TableCell>
-                <TableCell key={7} className={classes.tableCell}>{a.payload.fundingContract.eftype}</TableCell>
+                <TableCell key={7} className={classes.tableCell}>{a.payload.fundingContract.homeloantype}</TableCell>
                 <TableCell key={8} className={classes.tableCell}>{a.payload.fundingContract.assetType}</TableCell>
                 <TableCell key={9} className={classes.tableCell}>{a.payload.originationFee}</TableCell>
                 <TableCell key={10} className={classes.tableCellButton}>

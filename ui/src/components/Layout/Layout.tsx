@@ -4,7 +4,7 @@ import DamlLedger from "@daml/react";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import WholeSaleContractList from "../../pages/wholesale/WholesaleContract";
-import EFContractList from "../../pages/retail/EFContract";
+import EFContractList from "../../pages/retail/HomeLoanContract";
 import FundingRequestList from "../../pages/fundingrequest/FundingRequest";
 import FundingApprovalList from "../../pages/fundingapproval/FundingApproval";
 import { useUserState } from "../../context/UserContext";
