@@ -23,7 +23,7 @@ const Login = (props : RouteComponentProps) => {
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
         <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>Smart Contracts for EF </Typography>
+        <Typography className={classes.logotypeText}>Smart Contracts for Home Loans </Typography>
       </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>

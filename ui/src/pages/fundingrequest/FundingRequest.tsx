@@ -69,7 +69,7 @@ export default function FundingRequestList() {
               <TableCell key={2} className={classes.tableCell}>Originator</TableCell>
               <TableCell key={3} className={classes.tableCell}>Home Owner</TableCell>
               <TableCell key={4} className={classes.tableCell}>Amount</TableCell>
-              <TableCell key={5} className={classes.tableCell}>EF Contrat</TableCell>
+              <TableCell key={5} className={classes.tableCell}>Home Loan Contract</TableCell>
               <TableCell key={6} className={classes.tableCell}>Rate</TableCell>
               <TableCell key={7} className={classes.tableCell}>Type</TableCell>
               <TableCell key={8} className={classes.tableCell}>Asset Type</TableCell>

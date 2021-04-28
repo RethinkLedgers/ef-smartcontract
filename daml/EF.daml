@@ -105,6 +105,7 @@ setup = do
   allocatePartyWithHint "Originator" $ PartyIdHint with partyIdHint = "ledger-party-originator"
   allocatePartyWithHint "HomeOwner" $ PartyIdHint with partyIdHint = "ledger-party-homeowner"
   allocatePartyWithHint "GSE" $ PartyIdHint with partyIdHint = "ledger-party-gse"
+  allocatePartyWithHint "Quicken Loans" $ PartyIdHint with partyIdHint = "ledger-party-quicken"
 
   pure ()
 
@@ -125,6 +126,8 @@ test = do
   originator <- allocatePartyWithHint "Originator" $ PartyIdHint with partyIdHint = "ledger-party-originator"
   homeowner <- allocatePartyWithHint "HomeOwner" $ PartyIdHint with partyIdHint = "ledger-party-homeowner"
   gse <- allocatePartyWithHint "GSE" $ PartyIdHint with partyIdHint = "ledger-party-gse"
+  quicken <- allocatePartyWithHint "Quicken Loans" $ PartyIdHint with partyIdHint = "ledger-party-quicken"
+
 
   efContract <- submit originator $ createCmd HomeLoanContract
                   with 
