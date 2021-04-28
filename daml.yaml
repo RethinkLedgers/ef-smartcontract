@@ -5,9 +5,8 @@ source: daml
 init-script: EF:test
 parties:
 - ledger-party-business
-- ledger-party-dealer
 - ledger-party-originator
-- ledger-party-lessor
+- ledger-party-gse
 dependencies:
 - daml-prim
 - daml-stdlib

@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import { EF } from '@daml.js/ef-app/lib';
 import { useParty, useLedger, useStreamQueries } from '@daml/react';
 import Ledger from "@daml/ledger";
-import { EFContract } from "@daml.js/ef-app/lib/EF";
+import { HomeLoanContract } from "@daml.js/ef-app/lib/EF";
 import { FundingRequest } from "@daml.js/ef-app/lib/EF";
 import { InputDialog, InputDialogProps } from "./InputDialog";
 import useStyles from "./styles";
@@ -25,14 +25,14 @@ export default function HomeLoanContractList() {
   const {displayName, partyIdentifier, knownPartyDisplayNames} = useKnownParties () // BGY
 
 
-  type InputFieldsForNewAsset = Omit<EFContract, "EFContract">;
+  type InputFieldsForNewAsset = Omit<HomeLoanContract, "HomeLoanContract">;
   const defaultNewAssetProps: InputDialogProps<InputFieldsForNewAsset> = {
     open: false,
-    title: "New RetailContract",
+    title: "New  Home LoanContract",
     defaultValue: {
       originator: party,
       homeowner: party,
-      loantype: "ARM",
+      homeloantype: "ARM",
       startdate: "",
       duration: "",
       amount: "0",
@@ -46,8 +46,8 @@ export default function HomeLoanContractList() {
         label: "Originator",
         type: "text",
       },
-      business: {
-        label: "Business",
+      homeowner: {
+        label: "Home Owner",
         type: "text"
       },
       homeloantype: {
@@ -93,7 +93,7 @@ export default function HomeLoanContractList() {
     async function onClose(state: InputFieldsForNewAsset | null) {
       setNewAssetProps({ ...defaultNewAssetProps, open: false });
       if (!state) return;
-      const efData = { ...state, originator:  partyIdentifier(state.originator), business: partyIdentifier(state.business)}; // BGY
+      const efData = { ...state, originator:  partyIdentifier(state.originator), homeowner: partyIdentifier(state.homeowner)}; // BGY
       await ledger.create(EF.HomeLoanContract, efData);
     };
     setNewAssetProps({ ...defaultNewAssetProps, open: true, onClose });
@@ -105,7 +105,7 @@ export default function HomeLoanContractList() {
     title: "Funding Request",
     defaultValue: { newGse: party,  newFee: "", newFundingContractId: ""},
     fields: {
-      newLessor: {
+      newGse: {
         label: "GSE",
         type: "text"
       },
@@ -128,7 +128,7 @@ export default function HomeLoanContractList() {
     async function onClose(state: FundingRequest | null) {
       setRequestProps({ ...defaultRequestProps, open: false });
       if (!state) return;
-      await ledger.exercise(EF.HomeLoanContract.FundingRequest, asset.contractId, {...state, newLessor: partyIdentifier(state.newLessor)}); //BGY
+      await ledger.exercise(EF.HomeLoanContract.FundingRequest, asset.contractId, {...state, newGse: partyIdentifier(state.newGse)}); //BGY
     };
     setRequestProps({ ...defaultRequestProps, open: true, onClose })
   };

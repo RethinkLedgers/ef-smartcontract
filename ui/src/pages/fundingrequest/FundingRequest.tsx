@@ -51,8 +51,8 @@ export default function FundingRequestList() {
       async function onClose(state : FundingApproval | null) {
         setApprovalProps({ ...defaultApprovalProps, open: false});
         if (!state) return;
-        await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, {...state, selectedlessor: partyIdentifier(state.selectedlessor)}); //BGY
-        /* await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, {...state, selectedlessor: partyIdentifier(state.selectedlessor)}); */
+        await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, {...state, selectedGse: partyIdentifier(state.selectedGse)}); //BGY
+        /* await ledger.exercise(EF.FundingContractRequest.FundingApproval, asset.contractId, {...state, selectedgse: partyIdentifier(state.selectedgse)}); */
       };
       setApprovalProps({ ...defaultApprovalProps, open: true, onClose})
     };
