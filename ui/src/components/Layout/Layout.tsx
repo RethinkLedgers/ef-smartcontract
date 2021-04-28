@@ -3,8 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import DamlLedger from "@daml/react";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
-import WholeSaleContractList from "../../pages/wholesale/WholesaleContract";
-import EFContractList from "../../pages/retail/HomeLoanContract";
+import HomeLoanContractList from "../../pages/retail/HomeLoanContract";
 import FundingRequestList from "../../pages/fundingrequest/FundingRequest";
 import FundingApprovalList from "../../pages/fundingapproval/FundingApproval";
 import { useUserState } from "../../context/UserContext";
@@ -27,8 +26,7 @@ const Layout = () => {
               <div className={classes.content}>
                 <div className={classes.fakeToolbar} />
                 <Switch>
-                  <Route path="/app/retail" component={EFContractList} />
-                  <Route path="/app/wholesale" component={WholeSaleContractList} />
+                  <Route path="/app/retail" component={HomeLoanContractList} />
                   <Route path="/app/fundingrequest" component={FundingRequestList} />
                   <Route path="/app/fundingapproved" component={FundingApprovalList} />
                 </Switch>

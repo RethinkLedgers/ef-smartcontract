@@ -16,7 +16,7 @@ import Ledger, { PartyInfo } from '@daml/ledger';
 export function useKnownParties () {
 
     // YOU NEED THIS PART FOR RUNNING LOCALLY - START
-/*     const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
+     const [knownParties, setKnownParties] = React.useState<PartyInfo[]>([]);
     const ledger: Ledger = useLedger();
 
     useEffect(() => {
@@ -25,11 +25,11 @@ export function useKnownParties () {
         setKnownParties(lst);
     } ;
     getKnownParties()
-    }, [ledger]); */
+    }, [ledger]); 
     // YOU NEED THIS PART FOR RUNNING LOCALLY - END
 
     // YOU NEED THIS PART FOR RUNNING ON DAML HUB - START
-     const knownParties : PartyInfo[] = require('./parties.json') 
+    /*  const knownParties : PartyInfo[] = require('./parties.json')  */
     // YOU NEED THIS PART FOR RUNNING ON DAML HUB - END
 
     return {

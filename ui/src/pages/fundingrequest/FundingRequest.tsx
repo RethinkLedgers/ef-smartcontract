@@ -25,7 +25,7 @@ export default function FundingRequestList() {
     const defaultApprovalProps : InputDialogProps<FundingApproval> = {
       open: false,
       title: "Funding Approval",
-      defaultValue: {  newFundingDate: "",  selectedgse: party, newFundingRequestId: ""},
+      defaultValue: {  newFundingDate: "",  selectedGse: party, newFundingRequestId: ""},
       fields :{
         newFundingDate : {
           label: "FundingDate",
